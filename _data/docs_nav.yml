@@ -36,7 +36,15 @@
 - title: 7. 工具与补充清单
   children:
     - 7.1-运维常用工具清单
+- title: 8. 补充SOP与实用手册
+  children:
+    - 8.1-安全策略SOP
+    - 8.2-灾难恢复流程
+    - 8.3-DevOps发布流程
+    - 8.4-巡检与自动化脚本
+    - 8.5-值班手册
 - title: 目录与索引
   children:
     - 目录清单
     - README
+
