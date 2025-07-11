@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1.4-文档与知识管理规范 | 运维规范文档</title>
+  <title>7.1-运维常用工具清单 | 运维规范文档</title>
   <link rel="stylesheet" href="/KOpsDoc/assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/lunr/lunr.min.js"></script>
   <script>
@@ -72,7 +72,7 @@
               
               
                 
-                <li><a href="/KOpsDoc/1.4-%E6%96%87%E6%A1%A3%E4%B8%8E%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83.html" class="active">1.4-文档与知识管理规范</a></li>
+                <li><a href="/KOpsDoc/1.4-%E6%96%87%E6%A1%A3%E4%B8%8E%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83.html">1.4-文档与知识管理规范</a></li>
               
             
             </ul>
@@ -228,7 +228,7 @@
               
               
                 
-                <li><a href="/KOpsDoc/7.1-%E8%BF%90%E7%BB%B4%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E6%B8%85%E5%8D%95.html">7.1-运维常用工具清单</a></li>
+                <li><a href="/KOpsDoc/7.1-%E8%BF%90%E7%BB%B4%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E6%B8%85%E5%8D%95.html" class="active">7.1-运维常用工具清单</a></li>
               
             
             </ul>
@@ -254,76 +254,160 @@
     <main class="book-content">
       <article>
         
-        <h1 id="14-文档与知识管理规范">1.4 文档与知识管理规范</h1>
+        <h1 id="71-运维常用工具清单">7.1 运维常用工具清单</h1>
 
-<h2 id="一适用范围与目标">一、适用范围与目标</h2>
+<p>本清单结合《运维规范文档汇总清单》编号体系，按各领域主流高效工具归类，便于团队选型与查阅。</p>
+
+<hr />
+
+<h2 id="11-基础设施命名规范">1.1 基础设施命名规范</h2>
 <ul>
-  <li>适用于所有运维相关文档、SOP、知识库、案例归档等内容的管理。</li>
-  <li>目标：提升知识传承、团队协作和运维效率，减少知识孤岛和重复劳动。</li>
+  <li>无专用工具，推荐结合 CMDB/自动化平台统一命名策略。</li>
 </ul>
 
-<h2 id="二管理目标">二、管理目标</h2>
-<ol>
-  <li>文档结构清晰、内容准确、持续更新</li>
-  <li>知识库分类归档、便于检索、易于共享</li>
-  <li>SOP标准化、模板统一、流程可追溯</li>
-  <li>案例归档与复盘，促进经验沉淀</li>
-</ol>
-
-<h2 id="三详细规范">三、详细规范</h2>
+<h2 id="12-主机与资产管理规范">1.2 主机与资产管理规范</h2>
 <ul>
-  <li>文档编写：结构清晰，内容准确，及时更新，统一模板与命名规范</li>
-  <li>分类归档：按类型（SOP、案例、规范、FAQ等）和业务线归档</li>
-  <li>知识库建设：支持全文检索、标签、版本管理，定期评审优化</li>
-  <li>SOP管理：每个SOP包含目的、步骤、注意事项、回退方案，定期复查</li>
-  <li>案例归档：故障、变更、应急等案例归档，复盘总结，经验共享</li>
+  <li><strong>CMDBuild</strong>：开源资产管理</li>
+  <li><strong>Snipe-IT</strong>：IT 资产管理</li>
+  <li><strong>Ralph</strong>：数据中心和资产管理</li>
 </ul>
 
-<h2 id="四操作流程">四、操作流程</h2>
-<ol>
-  <li>新文档/SOP编写 → 审核 → 分类归档 → 发布</li>
-  <li>案例归档 → 复盘总结 → 归档入库 → 分享团队</li>
-  <li>定期文档/SOP复查 → 发现过期及时归档或更新</li>
-</ol>
-
-<h2 id="五实际案例">五、实际案例</h2>
+<h2 id="13-账号与权限管理规范">1.3 账号与权限管理规范</h2>
 <ul>
-  <li>生产环境MySQL主从切换SOP，按模板编写，发布到知识库</li>
-  <li>某次线上故障复盘报告归档，团队分享经验教训</li>
-  <li>FAQ文档定期补充，减少重复答疑</li>
+  <li><strong>FreeIPA</strong>：统一身份认证与权限管理</li>
+  <li><strong>Keycloak</strong>：开源身份与访问管理</li>
+  <li><strong>LDAP</strong>：目录服务</li>
+  <li><strong>Jumpserver</strong>：堡垒机</li>
 </ul>
 
-<h2 id="六sop模板">六、SOP模板</h2>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 标准操作流程（SOP）模板
-
-## 目的
-简要说明该 SOP 的目标和适用范围。
-
-## 操作步骤
-1. 步骤一
-2. 步骤二
-3. 步骤三
-
-## 注意事项
-- 注意点1
-- 注意点2
-
-## 回退方案
-如遇异常，如何回退或恢复。
-</code></pre></div></div>
-
-<h2 id="七注意事项">七、注意事项</h2>
+<h2 id="14-文档与知识管理规范">1.4 文档与知识管理规范</h2>
 <ul>
-  <li>文档需定期复查，过期及时归档或更新</li>
-  <li>SOP变更需同步通知相关团队成员</li>
-  <li>知识库权限分级，敏感文档需控制访问</li>
+  <li><strong>Confluence</strong>：团队知识库</li>
+  <li><strong>DokuWiki</strong>：轻量级 Wiki</li>
+  <li><strong>MediaWiki</strong>：开源 Wiki</li>
 </ul>
 
-<h2 id="八参考资料">八、参考资料</h2>
+<h2 id="21-变更与发布管理规范">2.1 变更与发布管理规范</h2>
 <ul>
-  <li>《Google SRE 文档管理最佳实践》</li>
-  <li>《阿里云运维知识库建设指南》</li>
-  <li>团队内部知识管理制度</li>
+  <li><strong>Jenkins</strong>：CI/CD 自动化发布</li>
+  <li><strong>GitLab CI / GitHub Actions</strong>：集成式流水线</li>
+  <li><strong>ArgoCD / Tekton</strong>：K8s 持续交付</li>
+  <li><strong>Rundeck</strong>：自动化运维与发布编排</li>
+</ul>
+
+<h2 id="22-自动化运维与脚本规范">2.2 自动化运维与脚本规范</h2>
+<ul>
+  <li><strong>Ansible</strong>：自动化运维</li>
+  <li><strong>SaltStack</strong>：分布式远程执行</li>
+  <li><strong>Fabric</strong>：Python 远程执行</li>
+  <li><strong>Puppet / Chef</strong>：自动化配置管理</li>
+</ul>
+
+<h2 id="23-自动化测试与演练规范">2.3 自动化测试与演练规范</h2>
+<ul>
+  <li><strong>Chaos Mesh / ChaosBlade</strong>：混沌工程测试</li>
+  <li><strong>pytest / Robot Framework</strong>：自动化测试</li>
+  <li><strong>Selenium</strong>：自动化 UI 测试</li>
+</ul>
+
+<h2 id="31-监控与告警规范">3.1 监控与告警规范</h2>
+<ul>
+  <li><strong>Prometheus</strong>：指标监控</li>
+  <li><strong>Zabbix</strong>：企业级监控</li>
+  <li><strong>Nagios</strong>：经典监控</li>
+  <li><strong>Alertmanager</strong>：告警管理</li>
+  <li><strong>Grafana</strong>：可视化仪表盘</li>
+</ul>
+
+<h2 id="32-日志与可观测性规范">3.2 日志与可观测性规范</h2>
+<ul>
+  <li><strong>ELK Stack</strong>（Elasticsearch + Logstash + Kibana）：日志采集与分析</li>
+  <li><strong>Loki</strong>：日志聚合</li>
+  <li><strong>Fluentd / Fluent Bit</strong>：日志收集</li>
+  <li><strong>Jaeger / Zipkin</strong>：分布式追踪</li>
+</ul>
+
+<h2 id="33-运维质量与效能度量规范">3.3 运维质量与效能度量规范</h2>
+<ul>
+  <li><strong>Grafana</strong>：KPI/指标可视化</li>
+  <li><strong>Prometheus</strong>：数据采集与度量</li>
+  <li><strong>自定义报表平台</strong>：如 PowerBI、Tableau</li>
+</ul>
+
+<h2 id="41-安全合规与审计规范">4.1 安全合规与审计规范</h2>
+<ul>
+  <li><strong>Wazuh</strong>：安全监控与合规</li>
+  <li><strong>OSSEC</strong>：主机入侵检测</li>
+  <li><strong>Auditd</strong>：Linux 审计</li>
+  <li><strong>OpenSCAP</strong>：合规扫描</li>
+</ul>
+
+<h2 id="42-数据安全与隐私保护规范">4.2 数据安全与隐私保护规范</h2>
+<ul>
+  <li><strong>HashiCorp Vault</strong>：密钥与机密管理</li>
+  <li><strong>GnuPG</strong>：数据加密</li>
+  <li><strong>Let’s Encrypt</strong>：SSL 证书</li>
+</ul>
+
+<h2 id="43-运维安全应急演练规范">4.3 运维安全应急演练规范</h2>
+<ul>
+  <li><strong>Jumpserver</strong>：操作审计与应急</li>
+  <li><strong>自建应急演练脚本/平台</strong></li>
+</ul>
+
+<h2 id="51-容器与云原生运维规范">5.1 容器与云原生运维规范</h2>
+<ul>
+  <li><strong>Docker</strong>：容器引擎</li>
+  <li><strong>Kubernetes</strong>：容器编排</li>
+  <li><strong>Helm / Kustomize</strong>：K8s 应用包管理</li>
+  <li><strong>Harbor</strong>：镜像仓库</li>
+</ul>
+
+<h2 id="52-ci_cd流水线与自动化规范">5.2 CI_CD流水线与自动化规范</h2>
+<ul>
+  <li><strong>Jenkins</strong>：CI/CD</li>
+  <li><strong>GitLab CI / GitHub Actions</strong></li>
+  <li><strong>Tekton / ArgoCD</strong></li>
+</ul>
+
+<h2 id="53-基础设施即代码iac规范">5.3 基础设施即代码（IaC）规范</h2>
+<ul>
+  <li><strong>Terraform</strong>：多云 IaC</li>
+  <li><strong>Ansible</strong>：配置即代码</li>
+  <li><strong>Pulumi</strong>：现代 IaC</li>
+  <li><strong>CloudFormation</strong>：AWS IaC</li>
+</ul>
+
+<h2 id="54-多云与混合云管理规范">5.4 多云与混合云管理规范</h2>
+<ul>
+  <li><strong>Rancher</strong>：多云 K8s 管理</li>
+  <li><strong>OpenStack</strong>：私有云平台</li>
+  <li><strong>Cloudify</strong>：多云编排</li>
+</ul>
+
+<h2 id="55-aiops与智能运维规范">5.5 AIOps与智能运维规范</h2>
+<ul>
+  <li><strong>Prometheus + AI 插件</strong>：智能告警</li>
+  <li><strong>ELK + ML</strong>：日志异常检测</li>
+  <li><strong>自研/商用 AIOps 平台</strong></li>
+</ul>
+
+<h2 id="61-备份与恢复规范">6.1 备份与恢复规范</h2>
+<ul>
+  <li><strong>Velero</strong>：K8s 备份恢复</li>
+  <li><strong>Restic / BorgBackup / Duplicity</strong>：高效备份</li>
+</ul>
+
+<h2 id="62-供应商与外包管理规范">6.2 供应商与外包管理规范</h2>
+<ul>
+  <li><strong>自建供应商管理系统</strong></li>
+  <li><strong>Snipe-IT</strong>：资产与供应商管理</li>
+</ul>
+
+<h2 id="63-绿色运维与可持续发展规范">6.3 绿色运维与可持续发展规范</h2>
+<ul>
+  <li><strong>Grafana</strong>：能耗可视化</li>
+  <li><strong>自研/商用能耗监控平台</strong></li>
 </ul>
 
       </article>
