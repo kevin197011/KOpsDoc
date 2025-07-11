@@ -4,6 +4,7 @@
   var resultsBox = document.getElementById('search-results');
   var idx = null;
   var docs = [];
+  var BASEURL = '{{ site.baseurl }}' || '';
 
   function renderResults(results) {
     if (!results.length) {
@@ -33,7 +34,7 @@
   }
 
   function init() {
-    fetch('/search-index.json')
+    fetch(BASEURL + '/search-index.json')
       .then(function(res) { return res.json(); })
       .then(function(data) {
         docs = data.docs;
