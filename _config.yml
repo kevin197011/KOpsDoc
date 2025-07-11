@@ -22,8 +22,8 @@ title: 运维规范文档
 email: kevin197011@outlook.com
 description: >-
   运维规范文档集锦，自动生成的 GitHub Pages 网站。
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/KOpsDoc" # the subpath of your site, e.g. /blog
+url: "https://kevin197011.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: kk
 github_username:  kk
 
