@@ -41,7 +41,7 @@
   function fetchAndIndexAllPages() {
     var baseurl = window.BASEURL || '';
     Promise.all(PAGE_LIST.map(function(name) {
-      var url = baseurl + '/' + name + '.html';
+      var url = baseurl + '/' + encodeURIComponent(name) + '.html';
       return fetch(url)
         .then(function(res) { return res.text(); })
         .then(function(html) {
