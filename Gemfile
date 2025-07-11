@@ -37,5 +37,3 @@ gem 'wdm', '~> 0.1', platforms: %i[mingw x64_mingw mswin]
 gem 'http_parser.rb', '~> 0.6.0', platforms: [:jruby]
 
 gem 'logger' # Silence Ruby 3.5+ logger warning for Jekyll
-
-gem 'jekyll-toc', '~> 0.19.0'
