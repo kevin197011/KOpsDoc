@@ -28,7 +28,6 @@ twitter_username: kk
 github_username:  kk
 
 # Build settings
-# theme: minima
 plugins:
   - jekyll-feed
   - jekyll-toc
