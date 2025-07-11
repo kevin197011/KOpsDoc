@@ -24,13 +24,15 @@ module Jekyll
           'content' => page.content.gsub(/<[^>]*>/, '').gsub(/\s+/, ' ')
         }
       end
-      # Write to a temp file in .jekyll-cache
+      # Write to a temp file in .jekyll-cache/assets/json
       cache_dir = File.join(site.source, '.jekyll-cache')
       FileUtils.mkdir_p(cache_dir)
-      temp_path = File.join(cache_dir, 'search-index.json')
+      json_dir = File.join(cache_dir, 'assets', 'json')
+      FileUtils.mkdir_p(json_dir)
+      temp_path = File.join(json_dir, 'search-index.json')
       File.open(temp_path, 'w') { |f| f.write({ docs: index }.to_json) }
       # Register as a static file for output
-      site.static_files << SearchIndexFile.new(site, cache_dir, '/assets/json', 'search-index.json')
+      site.static_files << SearchIndexFile.new(site, json_dir, '', 'search-index.json')
       puts "[search_index_generator] search-index.json registered as static file, docs count: #{index.size}"
     end
   end
