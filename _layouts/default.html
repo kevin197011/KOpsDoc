@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }} | {{ site.title }}</title>
   <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+  <script>
+    window.DOCS_NAV_LIST = [
+      {% assign nav = site.data.docs_nav %}
+      {% assign all_docs = "" | split: "|" %}
+      {% for group in nav %}
+        {% for doc in group.children %}
+          {% assign all_docs = all_docs | push: doc %}
+        {% endfor %}
+      {% endfor %}
+      {{ all_docs | map: 'to_json' | join: ',' }}
+    ];
+  </script>
 </head>
 <body>
   {{ content }}
