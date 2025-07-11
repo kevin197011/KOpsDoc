@@ -6,17 +6,15 @@
   <meta name="author" content="kk">
   <title>{{ page.title }} | {{ site.title }}</title>
   <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+  {% assign nav = site.data.docs_nav %}
+  {% assign all_docs = "" | split: "|" %}
+  {% for group in nav %}
+    {% for doc in group.children %}
+      {% assign all_docs = all_docs | push: doc %}
+    {% endfor %}
+  {% endfor %}
   <script>
-    window.DOCS_NAV_LIST = [
-      {% assign nav = site.data.docs_nav %}
-      {% assign all_docs = "" | split: "|" %}
-      {% for group in nav %}
-        {% for doc in group.children %}
-          {% assign all_docs = all_docs | push: doc %}
-        {% endfor %}
-      {% endfor %}
-      {{ all_docs | map: 'to_json' | join: ',' }}
-    ];
+    window.DOCS_NAV_LIST = [{{ all_docs | map: 'to_json' | join: ',' }}];
   </script>
 </head>
 <body>
