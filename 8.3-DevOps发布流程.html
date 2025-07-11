@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5.5-AIOps与智能运维规范 | 运维规范文档</title>
+  <title>8.3-DevOps发布流程 | 运维规范文档</title>
   <link rel="stylesheet" href="/KOpsDoc/assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/lunr/lunr.min.js"></script>
   <script>
@@ -192,7 +192,7 @@
               
               
                 
-                <li><a href="/KOpsDoc/5.5-AIOps%E4%B8%8E%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E8%A7%84%E8%8C%83.html" class="active">5.5-AIOps与智能运维规范</a></li>
+                <li><a href="/KOpsDoc/5.5-AIOps%E4%B8%8E%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E8%A7%84%E8%8C%83.html">5.5-AIOps与智能运维规范</a></li>
               
             
             </ul>
@@ -252,7 +252,7 @@
               
               
                 
-                <li><a href="/KOpsDoc/8.3-DevOps%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B.html">8.3-DevOps发布流程</a></li>
+                <li><a href="/KOpsDoc/8.3-DevOps%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B.html" class="active">8.3-DevOps发布流程</a></li>
               
             
               
@@ -290,65 +290,60 @@
     <main class="book-content">
       <article>
         
-        <h1 id="55-aiops与智能运维规范">5.5 AIOps与智能运维规范</h1>
+        <h1 id="83-devops-发布流程">8.3 DevOps 发布流程</h1>
 
-<h2 id="一适用范围与目标">一、适用范围与目标</h2>
+<h2 id="一蓝绿发布流程">一、蓝绿发布流程</h2>
 <ul>
-  <li>适用于所有引入AI/ML能力的监控、告警、日志、自动化修复、容量预测等智能运维场景。</li>
-  <li>目标：提升运维自动化、智能化水平，降低故障率与人力成本。</li>
+  <li>新旧环境并行，切流量</li>
+  <li>回滚机制</li>
+  <li>步骤：
+    <ol>
+      <li>部署新版本到“绿”环境</li>
+      <li>验证通过后切换流量</li>
+      <li>保留“蓝”环境以便回滚</li>
+    </ol>
+  </li>
 </ul>
 
-<h2 id="二管理目标">二、管理目标</h2>
+<h2 id="二灰度发布流程">二、灰度发布流程</h2>
+<ul>
+  <li>分批上线，监控指标</li>
+  <li>自动化脚本示例</li>
+  <li>步骤：
+    <ol>
+      <li>按用户/节点分批发布</li>
+      <li>监控关键指标</li>
+      <li>无异常后全量发布</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="三回滚规范">三、回滚规范</h2>
+<ul>
+  <li>镜像/配置回退</li>
+  <li>数据回滚注意事项</li>
+  <li>自动化回滚脚本</li>
+</ul>
+
+<h2 id="四发布-sop-模板">四、发布 SOP 模板</h2>
 <ol>
-  <li>智能告警、异常检测、根因分析自动化</li>
-  <li>自动化修复与自愈，提升系统韧性</li>
-  <li>数据采集、分析、决策智能化，持续优化</li>
+  <li>发布前检查（依赖、配置、回滚方案）</li>
+  <li>自动化部署</li>
+  <li>验证与回滚</li>
 </ol>
 
-<h2 id="三详细规范">三、详细规范</h2>
+<h2 id="五注意事项">五、注意事项</h2>
 <ul>
-  <li>智能告警与异常检测：采用AI/ML模型进行异常检测、降噪，支持多维聚合、根因分析</li>
-  <li>自动化修复与自愈：结合自动化平台实现故障自愈，支持自动回滚、重启、扩容等操作</li>
-  <li>数据采集与分析：全量采集监控、日志、指标数据，AI/ML模型训练与持续优化</li>
-  <li>决策与辅助：AI辅助运维决策、容量预测、资源调度，智能报表与趋势分析</li>
-  <li>安全与合规：AI模型与数据合规，敏感数据脱敏，模型可解释性</li>
+  <li>发布过程全程审计与记录</li>
+  <li>回滚方案需提前验证</li>
+  <li>灰度/蓝绿需有流量切换与监控</li>
 </ul>
 
-<h2 id="四操作流程">四、操作流程</h2>
-<ol>
-  <li>监控/日志/指标数据采集 → AI/ML模型训练 → 部署上线</li>
-  <li>智能告警触发 → 根因分析 → 自动化修复/自愈 → 记录与复盘</li>
-  <li>定期模型评估与优化 → 结果归档</li>
-</ol>
-
-<h2 id="五实际案例">五、实际案例</h2>
+<h2 id="六参考资料">六、参考资料</h2>
 <ul>
-  <li>生产环境引入AI异常检测，告警误报率下降30%，根因分析效率提升</li>
-  <li>自动化自愈脚本结合AI决策，故障恢复时间缩短50%</li>
-  <li>容量预测模型辅助资源扩容，避免业务高峰资源瓶颈</li>
-</ul>
-
-<h2 id="六aiops流程模板">六、AIOps流程模板</h2>
-<pre><code class="language-mermaid">graph TD;
-  数据采集--&gt;AI模型训练;
-  AI模型训练--&gt;智能告警;
-  智能告警--&gt;根因分析;
-  根因分析--&gt;自动化修复;
-  自动化修复--&gt;复盘优化;
-</code></pre>
-
-<h2 id="七注意事项">七、注意事项</h2>
-<ul>
-  <li>AI模型需定期评估，防止“模型漂移”</li>
-  <li>敏感数据需脱敏，模型训练与推理过程合规</li>
-  <li>自动化修复需有回滚与人工干预机制</li>
-</ul>
-
-<h2 id="八参考资料">八、参考资料</h2>
-<ul>
-  <li>《AIOps智能运维白皮书》</li>
-  <li>《智能告警与根因分析实践》</li>
-  <li>团队内部AIOps实施手册</li>
+  <li>《DevOps 发布最佳实践》</li>
+  <li>《Kubernetes 发布与回滚白皮书》</li>
+  <li>团队内部发布流程规范</li>
 </ul>
 
       </article>

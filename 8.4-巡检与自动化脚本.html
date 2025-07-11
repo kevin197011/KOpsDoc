@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5.5-AIOps与智能运维规范 | 运维规范文档</title>
+  <title>8.4-巡检与自动化脚本 | 运维规范文档</title>
   <link rel="stylesheet" href="/KOpsDoc/assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/lunr/lunr.min.js"></script>
   <script>
@@ -192,7 +192,7 @@
               
               
                 
-                <li><a href="/KOpsDoc/5.5-AIOps%E4%B8%8E%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E8%A7%84%E8%8C%83.html" class="active">5.5-AIOps与智能运维规范</a></li>
+                <li><a href="/KOpsDoc/5.5-AIOps%E4%B8%8E%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E8%A7%84%E8%8C%83.html">5.5-AIOps与智能运维规范</a></li>
               
             
             </ul>
@@ -258,7 +258,7 @@
               
               
                 
-                <li><a href="/KOpsDoc/8.4-%E5%B7%A1%E6%A3%80%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC.html">8.4-巡检与自动化脚本</a></li>
+                <li><a href="/KOpsDoc/8.4-%E5%B7%A1%E6%A3%80%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC.html" class="active">8.4-巡检与自动化脚本</a></li>
               
             
               
@@ -290,65 +290,45 @@
     <main class="book-content">
       <article>
         
-        <h1 id="55-aiops与智能运维规范">5.5 AIOps与智能运维规范</h1>
+        <h1 id="84-巡检与自动化脚本">8.4 巡检与自动化脚本</h1>
 
-<h2 id="一适用范围与目标">一、适用范围与目标</h2>
+<h2 id="一定时巡检任务">一、定时巡检任务</h2>
 <ul>
-  <li>适用于所有引入AI/ML能力的监控、告警、日志、自动化修复、容量预测等智能运维场景。</li>
-  <li>目标：提升运维自动化、智能化水平，降低故障率与人力成本。</li>
+  <li>关键服务存活、磁盘、证书、备份状态</li>
+  <li>推荐工具：cron、Ansible、Prometheus Alert</li>
+  <li>巡检内容示例：
+    <ul>
+      <li>节点健康、磁盘空间、证书有效期、备份状态</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="二管理目标">二、管理目标</h2>
-<ol>
-  <li>智能告警、异常检测、根因分析自动化</li>
-  <li>自动化修复与自愈，提升系统韧性</li>
-  <li>数据采集、分析、决策智能化，持续优化</li>
-</ol>
+<h2 id="二巡检-dsl-示例">二、巡检 DSL 示例</h2>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">检查 K8s 节点 Ready</span>
+  <span class="na">shell</span><span class="pi">:</span> <span class="s">kubectl get nodes | grep -v Ready</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">检查磁盘空间</span>
+  <span class="na">shell</span><span class="pi">:</span> <span class="s">df -h | awk '$5&gt;80 {print $0}'</span>
+</code></pre></div></div>
 
-<h2 id="三详细规范">三、详细规范</h2>
+<h2 id="三脚本库管理">三、脚本库管理</h2>
 <ul>
-  <li>智能告警与异常检测：采用AI/ML模型进行异常检测、降噪，支持多维聚合、根因分析</li>
-  <li>自动化修复与自愈：结合自动化平台实现故障自愈，支持自动回滚、重启、扩容等操作</li>
-  <li>数据采集与分析：全量采集监控、日志、指标数据，AI/ML模型训练与持续优化</li>
-  <li>决策与辅助：AI辅助运维决策、容量预测、资源调度，智能报表与趋势分析</li>
-  <li>安全与合规：AI模型与数据合规，敏感数据脱敏，模型可解释性</li>
+  <li>统一存储、版本控制（如 Git）</li>
+  <li>复用与参数化</li>
+  <li>定期评审与优化</li>
 </ul>
 
-<h2 id="四操作流程">四、操作流程</h2>
-<ol>
-  <li>监控/日志/指标数据采集 → AI/ML模型训练 → 部署上线</li>
-  <li>智能告警触发 → 根因分析 → 自动化修复/自愈 → 记录与复盘</li>
-  <li>定期模型评估与优化 → 结果归档</li>
-</ol>
-
-<h2 id="五实际案例">五、实际案例</h2>
+<h2 id="四注意事项">四、注意事项</h2>
 <ul>
-  <li>生产环境引入AI异常检测，告警误报率下降30%，根因分析效率提升</li>
-  <li>自动化自愈脚本结合AI决策，故障恢复时间缩短50%</li>
-  <li>容量预测模型辅助资源扩容，避免业务高峰资源瓶颈</li>
+  <li>巡检脚本需有日志与告警</li>
+  <li>关键巡检项需自动化闭环</li>
+  <li>脚本变更需评审与测试</li>
 </ul>
 
-<h2 id="六aiops流程模板">六、AIOps流程模板</h2>
-<pre><code class="language-mermaid">graph TD;
-  数据采集--&gt;AI模型训练;
-  AI模型训练--&gt;智能告警;
-  智能告警--&gt;根因分析;
-  根因分析--&gt;自动化修复;
-  自动化修复--&gt;复盘优化;
-</code></pre>
-
-<h2 id="七注意事项">七、注意事项</h2>
+<h2 id="五参考资料">五、参考资料</h2>
 <ul>
-  <li>AI模型需定期评估，防止“模型漂移”</li>
-  <li>敏感数据需脱敏，模型训练与推理过程合规</li>
-  <li>自动化修复需有回滚与人工干预机制</li>
-</ul>
-
-<h2 id="八参考资料">八、参考资料</h2>
-<ul>
-  <li>《AIOps智能运维白皮书》</li>
-  <li>《智能告警与根因分析实践》</li>
-  <li>团队内部AIOps实施手册</li>
+  <li>《自动化运维脚本最佳实践》</li>
+  <li>《企业级巡检与监控白皮书》</li>
+  <li>团队内部脚本库管理制度</li>
 </ul>
 
       </article>
