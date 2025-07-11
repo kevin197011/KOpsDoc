@@ -80,6 +80,10 @@ body {
   box-sizing: border-box;
   color: var(--sidebar-text);
   transition: background 0.3s;
+  height: 100vh;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .book-sidebar h2 {
   font-size: 1.1rem;
