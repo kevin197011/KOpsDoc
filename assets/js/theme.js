@@ -64,7 +64,7 @@
       '--primary', '--accent', '--table-header', '--table-row-even', '--table-row-odd', '--table-hover'
     ];
     const varValues = vars.map(v => v + ': ' + styles.getPropertyValue(v));
-    console.log('[主题切换]', 'current:', current, 'next:', next, 'body.classList:', body.classList.value, '\nCSS变量:', varValues.join(' | '));
+    // console.log('[主题切换]', 'current:', current, 'next:', next, 'body.classList:', body.classList.value, '\nCSS变量:', varValues.join(' | '));
   };
 
   // 初始化

@@ -34,7 +34,7 @@
   }
 
   function init() {
-    fetch(BASEURL + '/search-index.json')
+    fetch(BASEURL + '/assets/json/search-index.json')
       .then(function(res) { return res.json(); })
       .then(function(data) {
         docs = data.docs;

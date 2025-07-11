@@ -30,7 +30,7 @@ module Jekyll
       temp_path = File.join(cache_dir, 'search-index.json')
       File.open(temp_path, 'w') { |f| f.write({ docs: index }.to_json) }
       # Register as a static file for output
-      site.static_files << SearchIndexFile.new(site, cache_dir, '/', 'search-index.json')
+      site.static_files << SearchIndexFile.new(site, cache_dir, '/assets/json', 'search-index.json')
       puts "[search_index_generator] search-index.json registered as static file, docs count: #{index.size}"
     end
   end
