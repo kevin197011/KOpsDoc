@@ -24,8 +24,8 @@ description: >-
   运维规范文档集锦，自动生成的 GitHub Pages 网站。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+twitter_username: kk
+github_username:  kk
 
 # Build settings
 # theme: minima
