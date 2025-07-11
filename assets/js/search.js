@@ -4,7 +4,7 @@
   var resultsBox = document.getElementById('search-results');
   var idx = null;
   var docs = [];
-  var BASEURL = '{{ site.baseurl }}' || '';
+  // 只用全局 BASEURL 变量，由模板注入
 
   function renderResults(results) {
     if (!results.length) {
