@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.1-安全合规与审计规范 | 运维规范文档</title>
+  <link rel="stylesheet" href="/KOpsDoc/assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lunr/lunr.min.js"></script>
+  <script>
+    var BASEURL = "/KOpsDoc";
+  </script>
+  <script src="/KOpsDoc/assets/js/search.js" defer></script>
+  <script src="/KOpsDoc/assets/js/theme.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.mermaid) {
+        mermaid.initialize({ startOnLoad: false });
+        document.querySelectorAll('code.language-mermaid, code.mermaid').forEach(function(block, i) {
+          var pre = block.parentElement;
+          var code = block.textContent;
+          var container = document.createElement('div');
+          container.className = 'mermaid';
+          container.textContent = code;
+          pre.parentNode.replaceChild(container, pre);
+          try { mermaid.init(undefined, container); } catch(e) {}
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <header class="book-header">
+    <a href="/KOpsDoc/" class="book-logo">运维规范文档</a>
+    <button id="theme-toggle" onclick="toggleTheme()" style="float:right;margin-right:2rem;font-size:1.5em;background:none;border:none;cursor:pointer;outline:none;display:flex;align-items:center;gap:0.2em;">
+      <i id="theme-toggle-icon" class="ti ti-moon-stars"></i>
+    </button>
+  </header>
+  <div class="book-container">
+    <aside class="book-sidebar">
+      <nav>
+        <input type="search" id="doc-search" placeholder="搜索文档..." autocomplete="off" />
+        <div id="search-results" class="search-results"></div>
+        <h2>文档导航</h2>
+        <ul>
+        
+        
+        
+        
+          <li class="nav-group"><strong>1. 基础通用规范</strong>
+            <ul>
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/1.1-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.html">1.1-基础设施命名规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/1.2-%E4%B8%BB%E6%9C%BA%E4%B8%8E%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83.html">1.2-主机与资产管理规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/1.3-%E8%B4%A6%E5%8F%B7%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83.html">1.3-账号与权限管理规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/1.4-%E6%96%87%E6%A1%A3%E4%B8%8E%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83.html">1.4-文档与知识管理规范</a></li>
+              
+            
+            </ul>
+          </li>
+        
+          <li class="nav-group"><strong>2. 变更与发布管理</strong>
+            <ul>
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/2.1-%E5%8F%98%E6%9B%B4%E4%B8%8E%E5%8F%91%E5%B8%83%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83.html">2.1-变更与发布管理规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/2.1-%E5%8F%98%E6%9B%B4%E4%B8%8E%E5%8F%91%E5%B8%83%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83-%E6%A1%88%E4%BE%8B%E9%9B%86%E9%94%A6.html">2.1-变更与发布管理规范-案例集锦</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/2.2-%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E4%B8%8E%E8%84%9A%E6%9C%AC%E8%A7%84%E8%8C%83.html">2.2-自动化运维与脚本规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/2.3-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E4%B8%8E%E6%BC%94%E7%BB%83%E8%A7%84%E8%8C%83.html">2.3-自动化测试与演练规范</a></li>
+              
+            
+            </ul>
+          </li>
+        
+          <li class="nav-group"><strong>3. 监控与可观测性</strong>
+            <ul>
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/3.1-%E7%9B%91%E6%8E%A7%E4%B8%8E%E5%91%8A%E8%AD%A6%E8%A7%84%E8%8C%83.html">3.1-监控与告警规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/3.1-%E7%9B%91%E6%8E%A7%E4%B8%8E%E5%91%8A%E8%AD%A6%E8%A7%84%E8%8C%83-%E6%B5%81%E7%A8%8B%E5%9B%BE.html">3.1-监控与告警规范-流程图</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/3.2-%E6%97%A5%E5%BF%97%E4%B8%8E%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E8%A7%84%E8%8C%83.html">3.2-日志与可观测性规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/3.3-%E8%BF%90%E7%BB%B4%E8%B4%A8%E9%87%8F%E4%B8%8E%E6%95%88%E8%83%BD%E5%BA%A6%E9%87%8F%E8%A7%84%E8%8C%83.html">3.3-运维质量与效能度量规范</a></li>
+              
+            
+            </ul>
+          </li>
+        
+          <li class="nav-group"><strong>4. 安全与合规</strong>
+            <ul>
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/4.1-%E5%AE%89%E5%85%A8%E5%90%88%E8%A7%84%E4%B8%8E%E5%AE%A1%E8%AE%A1%E8%A7%84%E8%8C%83.html" class="active">4.1-安全合规与审计规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/4.2-%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E4%B8%8E%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E8%A7%84%E8%8C%83.html">4.2-数据安全与隐私保护规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/4.3-%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8%E5%BA%94%E6%80%A5%E6%BC%94%E7%BB%83%E8%A7%84%E8%8C%83.html">4.3-运维安全应急演练规范</a></li>
+              
+            
+            </ul>
+          </li>
+        
+          <li class="nav-group"><strong>5. 云原生与智能运维</strong>
+            <ul>
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/5.1-%E5%AE%B9%E5%99%A8%E4%B8%8E%E4%BA%91%E5%8E%9F%E7%94%9F%E8%BF%90%E7%BB%B4%E8%A7%84%E8%8C%83.html">5.1-容器与云原生运维规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/5.2-CI_CD%E6%B5%81%E6%B0%B4%E7%BA%BF%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96%E8%A7%84%E8%8C%83.html">5.2-CI_CD流水线与自动化规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/5.3-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A0%81%EF%BC%88IaC%EF%BC%89%E8%A7%84%E8%8C%83.html">5.3-基础设施即代码（IaC）规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/5.4-%E5%A4%9A%E4%BA%91%E4%B8%8E%E6%B7%B7%E5%90%88%E4%BA%91%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83.html">5.4-多云与混合云管理规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/5.5-AIOps%E4%B8%8E%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E8%A7%84%E8%8C%83.html">5.5-AIOps与智能运维规范</a></li>
+              
+            
+            </ul>
+          </li>
+        
+          <li class="nav-group"><strong>6. 运营与可持续发展</strong>
+            <ul>
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/6.1-%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D%E8%A7%84%E8%8C%83.html">6.1-备份与恢复规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/6.2-%E4%BE%9B%E5%BA%94%E5%95%86%E4%B8%8E%E5%A4%96%E5%8C%85%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83.html">6.2-供应商与外包管理规范</a></li>
+              
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/6.3-%E7%BB%BF%E8%89%B2%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95%E8%A7%84%E8%8C%83.html">6.3-绿色运维与可持续发展规范</a></li>
+              
+            
+            </ul>
+          </li>
+        
+          <li class="nav-group"><strong>目录与索引</strong>
+            <ul>
+            
+              
+              
+                
+                <li><a href="/KOpsDoc/%E7%9B%AE%E5%BD%95%E6%B8%85%E5%8D%95.html">目录清单</a></li>
+              
+            
+              
+              
+            
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="book-content">
+      <article>
+        
+        <h1 id="41-安全合规与审计规范">4.1 安全合规与审计规范</h1>
+
+<h2 id="一适用范围与目标">一、适用范围与目标</h2>
+<ul>
+  <li>适用于所有IT系统、云平台、网络、主机、数据库等的安全、合规与审计管理。</li>
+  <li>目标：保障系统安全、满足合规要求、实现操作可追溯与风险可控。</li>
+</ul>
+
+<h2 id="二管理目标">二、管理目标</h2>
+<ol>
+  <li>安全策略标准化，合规要求落地</li>
+  <li>审计全覆盖，关键操作可追溯</li>
+  <li>定期检查与整改，持续提升安全水平</li>
+</ol>
+
+<h2 id="三详细规范">三、详细规范</h2>
+<ul>
+  <li>网络与防火墙：端口、白名单、访问控制策略，定期安全组审查</li>
+  <li>身份与权限：RBAC、最小权限原则，敏感操作多因子认证</li>
+  <li>日志与审计：关键操作、登录、变更全量日志，日志集中存储与定期备份</li>
+  <li>合规检查：定期安全扫描与合规自查，敏感数据加密与脱敏</li>
+  <li>安全事件响应：分级响应流程，取证与报告要求</li>
+  <li>数据留存：日志、审计数据保留≥180天，满足等保、GDPR等法规</li>
+</ul>
+
+<h2 id="四操作流程">四、操作流程</h2>
+<ol>
+  <li>新系统上线 → 安全基线检查 → 权限配置 → 审计策略部署</li>
+  <li>日常操作 → 审计日志采集 → 定期安全检查 → 问题整改</li>
+  <li>安全事件发生 → 分级响应 → 取证与报告 → 复盘与改进</li>
+</ol>
+
+<h2 id="五实际案例">五、实际案例</h2>
+<ul>
+  <li>定期安全组审查，发现异常端口开放，及时关闭并记录整改</li>
+  <li>生产数据库敏感操作需二次认证，操作全程审计</li>
+  <li>安全事件发生后，按流程取证、报告、复盘，完善应急预案</li>
+</ul>
+
+<h2 id="六安全审计记录模板">六、安全审计记录模板</h2>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 安全审计记录
+- 审计编号：
+- 审计对象：
+- 审计时间：
+- 审计内容：
+- 发现问题：
+- 整改措施：
+- 责任人：
+- 复查结果：
+</code></pre></div></div>
+
+<h2 id="七注意事项">七、注意事项</h2>
+<ul>
+  <li>禁止弱口令、默认账号、未授权端口暴露</li>
+  <li>审计日志需防篡改、定期备份，敏感数据加密</li>
+  <li>合规要求变更需及时同步到所有系统</li>
+</ul>
+
+<h2 id="八参考资料">八、参考资料</h2>
+<ul>
+  <li>《等保2.0安全合规指南》</li>
+  <li>《GDPR 数据保护合规手册》</li>
+  <li>团队内部安全管理制度</li>
+</ul>
+
+      </article>
+    </main>
+  </div>
+  <footer class="book-footer">
+    <p>© 2025 运维规范文档 | Powered by Jekyll</p>
+  </footer>
+</body>
+</html>
