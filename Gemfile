@@ -17,6 +17,9 @@ gem 'jekyll', '~> 4.4.1'
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem 'jekyll-feed', '~> 0.12'
+  gem 'jekyll-toc', '~> 0.19.0'
+  # 自动加载自定义插件
+  gem 'json'
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
