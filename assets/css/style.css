@@ -105,12 +105,19 @@ body {
 }
 
 /* 确保 body 作为 flex 容器，页脚固定在底部 */
-body > * {
+body > .book-header {
   flex-shrink: 0;
 }
 
 body > .book-container {
   flex: 1 0 auto;
+  min-height: 0;
+  display: flex;
+}
+
+body > .book-footer {
+  flex-shrink: 0;
+  margin-top: auto;
 }
 
 /* 头部导航栏 - 浮动设计 */
@@ -629,9 +636,9 @@ body.theme-light .book-content tr:hover {
   padding: 1.5rem 0;
   font-size: 0.875rem;
   border-top: 1px solid var(--border);
-  position: relative;
   width: 100%;
   z-index: 10;
+  margin-top: auto;
 }
 
 body.theme-light .book-footer {
