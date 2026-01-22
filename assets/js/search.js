@@ -16,14 +16,15 @@
   var docs = [];
   function renderResults(results) {
     if (!results.length) {
-      resultsBox.innerHTML = '<ul><li>无匹配结果</li></ul>';
+      resultsBox.innerHTML = '<ul><li style="padding: 0.75rem 1rem; color: var(--text-muted);">无匹配结果</li></ul>';
       resultsBox.style.display = 'block';
       return;
     }
     var html = '<ul>' + results.map(function(r) {
       var d = docs.find(doc => doc.url === r.ref);
-      return '<li><a href="' + d.url + '">' + d.title + '</a></li>';
-    }).join('') + '</ul>';
+      if (!d) return '';
+      return '<li><a href="' + d.url + '" style="cursor: pointer;">' + d.title + '</a></li>';
+    }).filter(Boolean).join('') + '</ul>';
     resultsBox.innerHTML = html;
     resultsBox.style.display = 'block';
   }

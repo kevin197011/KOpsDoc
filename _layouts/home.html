@@ -32,8 +32,8 @@
 </head>
 <body>
   <header class="book-header">
-    <a href="{{ '/' | relative_url }}" class="book-logo">运维规范文档</a>
-    <button id="theme-toggle" onclick="toggleTheme()" style="float:right;margin-right:2rem;font-size:1.5em;background:none;border:none;cursor:pointer;outline:none;display:flex;align-items:center;gap:0.2em;">
+    <a href="{{ '/' | relative_url }}" class="book-logo" aria-label="返回首页">运维规范文档</a>
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="切换主题" type="button">
       <i id="theme-toggle-icon" class="ti ti-moon-stars"></i>
     </button>
   </header>
