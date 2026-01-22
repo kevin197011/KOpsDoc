@@ -32,8 +32,8 @@
 </head>
 <body>
   <header class="book-header">
-    <a href="/KOpsDoc/" class="book-logo">运维规范文档</a>
-    <button id="theme-toggle" onclick="toggleTheme()" style="float:right;margin-right:2rem;font-size:1.5em;background:none;border:none;cursor:pointer;outline:none;display:flex;align-items:center;gap:0.2em;">
+    <a href="/KOpsDoc/" class="book-logo" aria-label="返回首页">运维规范文档</a>
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="切换主题" type="button">
       <i id="theme-toggle-icon" class="ti ti-moon-stars"></i>
     </button>
   </header>
@@ -292,57 +292,284 @@
         
         <h1 id="83-devops-发布流程">8.3 DevOps 发布流程</h1>
 
-<h2 id="一蓝绿发布流程">一、蓝绿发布流程</h2>
+<h2 id="一适用范围与目标">一、适用范围与目标</h2>
+
 <ul>
-  <li>新旧环境并行，切流量</li>
-  <li>回滚机制</li>
-  <li>步骤：
-    <ol>
-      <li>部署新版本到“绿”环境</li>
-      <li>验证通过后切换流量</li>
-      <li>保留“蓝”环境以便回滚</li>
-    </ol>
-  </li>
+  <li>适用于应用、服务、配置等的发布、更新、回滚等 DevOps 操作。</li>
+  <li>目标：建立标准化的发布流程，保障发布安全，降低发布风险，提升发布效率。</li>
 </ul>
 
-<h2 id="二灰度发布流程">二、灰度发布流程</h2>
-<ul>
-  <li>分批上线，监控指标</li>
-  <li>自动化脚本示例</li>
-  <li>步骤：
-    <ol>
-      <li>按用户/节点分批发布</li>
-      <li>监控关键指标</li>
-      <li>无异常后全量发布</li>
-    </ol>
-  </li>
-</ul>
+<h2 id="二管理目标">二、管理目标</h2>
 
-<h2 id="三回滚规范">三、回滚规范</h2>
-<ul>
-  <li>镜像/配置回退</li>
-  <li>数据回滚注意事项</li>
-  <li>自动化回滚脚本</li>
-</ul>
-
-<h2 id="四发布-sop-模板">四、发布 SOP 模板</h2>
 <ol>
-  <li>发布前检查（依赖、配置、回滚方案）</li>
-  <li>自动化部署</li>
-  <li>验证与回滚</li>
+  <li>发布流程标准化，支持多种发布策略</li>
+  <li>发布过程可追溯、可回滚</li>
+  <li>自动化发布与人工审核相结合</li>
+  <li>发布后验证与监控完善</li>
 </ol>
 
-<h2 id="五注意事项">五、注意事项</h2>
+<h2 id="三详细规范">三、详细规范</h2>
+
+<h3 id="蓝绿发布">蓝绿发布</h3>
+
 <ul>
-  <li>发布过程全程审计与记录</li>
-  <li>回滚方案需提前验证</li>
-  <li>灰度/蓝绿需有流量切换与监控</li>
+  <li><strong>原理</strong>：新旧环境并行，通过流量切换实现零停机发布</li>
+  <li><strong>适用场景</strong>：需要快速回滚的场景，对停机时间要求高的场景</li>
+  <li><strong>优势</strong>：零停机、快速回滚、风险可控</li>
+  <li><strong>注意事项</strong>：需要双倍资源，数据兼容性要求高</li>
 </ul>
 
-<h2 id="六参考资料">六、参考资料</h2>
+<h3 id="灰度发布金丝雀发布">灰度发布（金丝雀发布）</h3>
+
+<ul>
+  <li><strong>原理</strong>：逐步将流量切换到新版本，监控指标，无异常后全量发布</li>
+  <li><strong>适用场景</strong>：需要逐步验证新版本的场景，降低发布风险</li>
+  <li><strong>优势</strong>：风险可控、可逐步验证、支持快速回滚</li>
+  <li><strong>注意事项</strong>：需要流量控制能力，监控指标完善</li>
+</ul>
+
+<h3 id="滚动发布">滚动发布</h3>
+
+<ul>
+  <li><strong>原理</strong>：逐步替换旧版本实例，保持服务可用</li>
+  <li><strong>适用场景</strong>：Kubernetes 等容器平台的标准发布方式</li>
+  <li><strong>优势</strong>：资源利用率高、发布平滑</li>
+  <li><strong>注意事项</strong>：需要健康检查，确保新实例就绪</li>
+</ul>
+
+<h3 id="回滚机制">回滚机制</h3>
+
+<ul>
+  <li><strong>镜像回退</strong>：回退到上一个稳定版本</li>
+  <li><strong>配置回退</strong>：回退配置变更</li>
+  <li><strong>数据回滚</strong>：数据库变更回滚（需谨慎）</li>
+  <li><strong>自动化回滚</strong>：监控异常自动触发回滚</li>
+</ul>
+
+<h2 id="四操作流程">四、操作流程</h2>
+
+<h3 id="蓝绿发布流程">蓝绿发布流程</h3>
+
+<ol>
+  <li><strong>发布前检查</strong> → 检查依赖、配置、回滚方案</li>
+  <li><strong>部署新版本</strong> → 部署新版本到”绿”环境</li>
+  <li><strong>健康检查</strong> → 检查新版本健康状态</li>
+  <li><strong>流量切换</strong> → 逐步或一次性切换流量到新版本</li>
+  <li><strong>监控验证</strong> → 监控业务指标，验证功能正常</li>
+  <li><strong>保留旧版本</strong> → 保留”蓝”环境一段时间以便回滚</li>
+  <li><strong>清理资源</strong> → 确认无问题后清理旧版本资源</li>
+</ol>
+
+<h3 id="灰度发布流程">灰度发布流程</h3>
+
+<ol>
+  <li><strong>发布前检查</strong> → 检查依赖、配置、回滚方案</li>
+  <li><strong>部署新版本</strong> → 部署新版本实例</li>
+  <li><strong>小流量验证</strong> → 切换 5-10% 流量到新版本</li>
+  <li><strong>监控指标</strong> → 监控错误率、响应时间、业务指标</li>
+  <li><strong>逐步放量</strong> → 无异常后逐步增加流量（10% → 50% → 100%）</li>
+  <li><strong>全量发布</strong> → 所有流量切换到新版本</li>
+  <li><strong>清理旧版本</strong> → 确认无问题后清理旧版本</li>
+</ol>
+
+<h3 id="回滚流程">回滚流程</h3>
+
+<ol>
+  <li><strong>触发回滚</strong> → 检测到异常或手动触发回滚</li>
+  <li><strong>评估影响</strong> → 评估回滚的影响范围</li>
+  <li><strong>执行回滚</strong> → 回退到上一个稳定版本</li>
+  <li><strong>验证业务</strong> → 验证业务功能恢复正常</li>
+  <li><strong>记录归档</strong> → 记录回滚原因和过程</li>
+  <li><strong>问题分析</strong> → 分析问题原因，制定改进措施</li>
+</ol>
+
+<h2 id="五实际案例">五、实际案例</h2>
+
+<h3 id="案例1蓝绿发布-web-服务">案例1：蓝绿发布 Web 服务</h3>
+
+<ul>
+  <li><strong>场景</strong>：生产环境 Web 服务版本更新</li>
+  <li><strong>步骤</strong>：
+    <ol>
+      <li>部署新版本到”绿”环境</li>
+      <li>健康检查通过</li>
+      <li>切换 50% 流量到新版本</li>
+      <li>监控 10 分钟无异常</li>
+      <li>切换 100% 流量到新版本</li>
+      <li>保留”蓝”环境 24 小时</li>
+    </ol>
+  </li>
+  <li><strong>结果</strong>：零停机发布，业务无影响</li>
+  <li><strong>亮点</strong>：分阶段切换，风险可控</li>
+</ul>
+
+<h3 id="案例2灰度发布-api-服务">案例2：灰度发布 API 服务</h3>
+
+<ul>
+  <li><strong>场景</strong>：API 服务重大版本更新</li>
+  <li><strong>步骤</strong>：
+    <ol>
+      <li>部署新版本实例</li>
+      <li>切换 5% 流量到新版本</li>
+      <li>监控 30 分钟，错误率正常</li>
+      <li>切换 20% 流量，继续监控</li>
+      <li>逐步增加到 100% 流量</li>
+      <li>清理旧版本实例</li>
+    </ol>
+  </li>
+  <li><strong>结果</strong>：逐步验证，无异常</li>
+  <li><strong>亮点</strong>：逐步放量，风险可控</li>
+</ul>
+
+<h3 id="案例3自动回滚">案例3：自动回滚</h3>
+
+<ul>
+  <li><strong>场景</strong>：发布后检测到错误率上升</li>
+  <li><strong>步骤</strong>：
+    <ol>
+      <li>监控系统检测到错误率 &gt; 1%</li>
+      <li>自动触发回滚流程</li>
+      <li>回退到上一个稳定版本</li>
+      <li>验证业务恢复正常</li>
+      <li>通知相关人员</li>
+      <li>分析问题原因</li>
+    </ol>
+  </li>
+  <li><strong>结果</strong>：2 分钟内完成回滚，业务恢复</li>
+  <li><strong>亮点</strong>：自动化回滚，快速恢复</li>
+</ul>
+
+<h2 id="六操作模板">六、操作模板</h2>
+
+<h3 id="发布前检查清单">发布前检查清单</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># 发布前检查清单</span>
+
+<span class="gu">## 代码与配置</span>
+<span class="p">-</span> [ ] 代码已通过测试
+<span class="p">-</span> [ ] 配置文件已更新
+<span class="p">-</span> [ ] 依赖版本已确认
+<span class="p">-</span> [ ] 数据库变更已准备
+
+<span class="gu">## 发布方案</span>
+<span class="p">-</span> [ ] 发布策略已确定（蓝绿/灰度/滚动）
+<span class="p">-</span> [ ] 回滚方案已准备
+<span class="p">-</span> [ ] 发布窗口已确定
+<span class="p">-</span> [ ] 相关人员已通知
+
+<span class="gu">## 监控与告警</span>
+<span class="p">-</span> [ ] 监控指标已配置
+<span class="p">-</span> [ ] 告警规则已设置
+<span class="p">-</span> [ ] 监控面板已准备
+<span class="p">-</span> [ ] 值班人员已就位
+</code></pre></div></div>
+
+<h3 id="蓝绿发布脚本示例kubernetes">蓝绿发布脚本示例（Kubernetes）</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 部署新版本（绿环境）</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">app-green</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">myapp</span>
+      <span class="na">version</span><span class="pi">:</span> <span class="s">green</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">myapp</span>
+        <span class="na">version</span><span class="pi">:</span> <span class="s">green</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">app</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">myapp:v2.0</span>
+<span class="nn">---</span>
+<span class="c1"># 服务流量切换</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">myapp-service</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">myapp</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">green</span>  <span class="c1"># 切换到绿环境</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8080</span>
+</code></pre></div></div>
+
+<h3 id="灰度发布配置示例istio">灰度发布配置示例（Istio）</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">networking.istio.io/v1alpha3</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">VirtualService</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">myapp</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">hosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">myapp</span>
+  <span class="na">http</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">match</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">headers</span><span class="pi">:</span>
+        <span class="na">canary</span><span class="pi">:</span>
+          <span class="na">exact</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+    <span class="na">route</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">destination</span><span class="pi">:</span>
+        <span class="na">host</span><span class="pi">:</span> <span class="s">myapp</span>
+        <span class="na">subset</span><span class="pi">:</span> <span class="s">v2</span>
+      <span class="na">weight</span><span class="pi">:</span> <span class="m">100</span>
+  <span class="pi">-</span> <span class="na">route</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">destination</span><span class="pi">:</span>
+        <span class="na">host</span><span class="pi">:</span> <span class="s">myapp</span>
+        <span class="na">subset</span><span class="pi">:</span> <span class="s">v1</span>
+      <span class="na">weight</span><span class="pi">:</span> <span class="m">90</span>
+    <span class="pi">-</span> <span class="na">destination</span><span class="pi">:</span>
+        <span class="na">host</span><span class="pi">:</span> <span class="s">myapp</span>
+        <span class="na">subset</span><span class="pi">:</span> <span class="s">v2</span>
+      <span class="na">weight</span><span class="pi">:</span> <span class="m">10</span>
+</code></pre></div></div>
+
+<h3 id="回滚脚本示例">回滚脚本示例</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># 回滚脚本</span>
+
+<span class="nv">APP_NAME</span><span class="o">=</span><span class="s2">"myapp"</span>
+<span class="nv">PREVIOUS_VERSION</span><span class="o">=</span><span class="s2">"v1.0"</span>
+
+<span class="nb">echo</span> <span class="s2">"开始回滚 </span><span class="k">${</span><span class="nv">APP_NAME</span><span class="k">}</span><span class="s2"> 到 </span><span class="k">${</span><span class="nv">PREVIOUS_VERSION</span><span class="k">}</span><span class="s2">"</span>
+
+<span class="c"># 回滚 Deployment</span>
+kubectl rollout undo deployment/<span class="k">${</span><span class="nv">APP_NAME</span><span class="k">}</span>
+
+<span class="c"># 等待回滚完成</span>
+kubectl rollout status deployment/<span class="k">${</span><span class="nv">APP_NAME</span><span class="k">}</span>
+
+<span class="c"># 验证服务</span>
+kubectl get pods <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span><span class="k">${</span><span class="nv">APP_NAME</span><span class="k">}</span>
+
+<span class="nb">echo</span> <span class="s2">"回滚完成"</span>
+</code></pre></div></div>
+
+<h2 id="七注意事项">七、注意事项</h2>
+
+<ul>
+  <li><strong>发布过程全程审计</strong>：所有发布操作需记录，便于追溯</li>
+  <li><strong>回滚方案需提前验证</strong>：回滚方案需在测试环境验证</li>
+  <li><strong>灰度/蓝绿需有流量切换与监控</strong>：确保有完善的流量控制和监控</li>
+  <li><strong>发布窗口选择</strong>：选择业务低峰期发布，降低影响</li>
+  <li><strong>数据兼容性</strong>：确保新版本与旧版本数据兼容</li>
+  <li><strong>通知机制</strong>：发布前后及时通知相关人员</li>
+</ul>
+
+<h2 id="八参考资料">八、参考资料</h2>
+
 <ul>
   <li>《DevOps 发布最佳实践》</li>
   <li>《Kubernetes 发布与回滚白皮书》</li>
+  <li>《Istio 流量管理指南》</li>
   <li>团队内部发布流程规范</li>
 </ul>
 
@@ -350,48 +577,80 @@
     </main>
   </div>
   <footer class="book-footer">
-    <p>© 2025 运维规范文档 | Powered by Jekyll and AI</p>
+    <p>© 2026 运维规范文档 | Powered by Jekyll and AI</p>
   </footer>
-  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" style="display:none;">
-    <span style="font-size:1.5em;">☰</span>
+  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" type="button">
+    <i class="ti ti-menu-2" style="font-size:1.5em;"></i>
   </button>
 </body>
 <script>
   // 移动端侧边栏收起/展开逻辑
-  function toggleSidebar(open) {
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!sidebar) return;
-    if (open === undefined) sidebar.classList.toggle('open');
-    else if (open) sidebar.classList.add('open');
-    else sidebar.classList.remove('open');
-  }
-  function handleSidebarBtn() {
-    var btn = document.getElementById('sidebarToggleBtn');
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!btn || !sidebar) return;
-    function check() {
-      if (window.innerWidth <= 900) {
-        btn.style.display = 'flex';
-        sidebar.classList.remove('open');
+  (function() {
+    function toggleSidebar(open) {
+      var sidebar = document.querySelector('.book-sidebar');
+      if (!sidebar) return;
+      if (open === undefined) {
+        sidebar.classList.toggle('open');
+      } else if (open) {
+        sidebar.classList.add('open');
       } else {
-        btn.style.display = 'none';
         sidebar.classList.remove('open');
       }
     }
-    btn.onclick = function(e) {
-      e.stopPropagation();
-      toggleSidebar();
-    };
-    document.addEventListener('click', function(e) {
-      if (window.innerWidth > 900) return;
+
+    function handleSidebarBtn() {
+      var btn = document.getElementById('sidebarToggleBtn');
       var sidebar = document.querySelector('.book-sidebar');
-      if (sidebar && sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn) {
-        sidebar.classList.remove('open');
+      if (!btn || !sidebar) return;
+
+      function check() {
+        if (window.innerWidth <= 900) {
+          btn.style.display = 'flex';
+          if (!sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        } else {
+          btn.style.display = 'none';
+          sidebar.classList.remove('open');
+        }
       }
-    });
-    window.addEventListener('resize', check);
-    check();
-  }
-  document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSidebar();
+      });
+
+      // 点击外部关闭侧边栏
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth > 900) return;
+        var sidebar = document.querySelector('.book-sidebar');
+        if (sidebar && sidebar.classList.contains('open') && 
+            !sidebar.contains(e.target) && 
+            e.target !== btn && 
+            !btn.contains(e.target)) {
+          sidebar.classList.remove('open');
+        }
+      });
+
+      // ESC 键关闭侧边栏
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var sidebar = document.querySelector('.book-sidebar');
+          if (sidebar && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        }
+      });
+
+      window.addEventListener('resize', check);
+      check();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+    } else {
+      handleSidebarBtn();
+    }
+  })();
 </script>
 </html>

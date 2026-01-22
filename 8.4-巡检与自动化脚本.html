@@ -32,8 +32,8 @@
 </head>
 <body>
   <header class="book-header">
-    <a href="/KOpsDoc/" class="book-logo">运维规范文档</a>
-    <button id="theme-toggle" onclick="toggleTheme()" style="float:right;margin-right:2rem;font-size:1.5em;background:none;border:none;cursor:pointer;outline:none;display:flex;align-items:center;gap:0.2em;">
+    <a href="/KOpsDoc/" class="book-logo" aria-label="返回首页">运维规范文档</a>
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="切换主题" type="button">
       <i id="theme-toggle-icon" class="ti ti-moon-stars"></i>
     </button>
   </header>
@@ -292,42 +292,331 @@
         
         <h1 id="84-巡检与自动化脚本">8.4 巡检与自动化脚本</h1>
 
-<h2 id="一定时巡检任务">一、定时巡检任务</h2>
+<h2 id="一适用范围与目标">一、适用范围与目标</h2>
+
 <ul>
-  <li>关键服务存活、磁盘、证书、备份状态</li>
-  <li>推荐工具：cron、Ansible、Prometheus Alert</li>
-  <li>巡检内容示例：
+  <li>适用于系统、服务、基础设施等的日常巡检和自动化运维脚本管理。</li>
+  <li>目标：建立标准化的巡检流程，提升运维效率，降低人工成本，保障系统稳定。</li>
+</ul>
+
+<h2 id="二管理目标">二、管理目标</h2>
+
+<ol>
+  <li>巡检任务标准化、自动化，覆盖关键指标</li>
+  <li>脚本开发规范，可维护、可复用</li>
+  <li>巡检结果可追溯，异常自动告警</li>
+  <li>脚本库统一管理，版本可控</li>
+</ol>
+
+<h2 id="三详细规范">三、详细规范</h2>
+
+<h3 id="定时巡检任务">定时巡检任务</h3>
+
+<ul>
+  <li><strong>巡检内容</strong>：
     <ul>
-      <li>节点健康、磁盘空间、证书有效期、备份状态</li>
+      <li>节点健康状态（Kubernetes 节点、主机状态）</li>
+      <li>磁盘空间使用率（&gt;80% 告警）</li>
+      <li>证书有效期（&lt;30 天告警）</li>
+      <li>备份状态（备份是否成功、备份文件完整性）</li>
+      <li>服务可用性（关键服务是否正常运行）</li>
+      <li>资源使用率（CPU、内存、网络）</li>
     </ul>
   </li>
+  <li><strong>巡检频率</strong>：每日/每周/每月，根据重要性确定</li>
+  <li><strong>巡检工具</strong>：cron、Ansible、Prometheus Alert、自定义脚本</li>
+  <li><strong>告警机制</strong>：异常自动告警，通知相关人员</li>
 </ul>
 
-<h2 id="二巡检-dsl-示例">二、巡检 DSL 示例</h2>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">检查 K8s 节点 Ready</span>
-  <span class="na">shell</span><span class="pi">:</span> <span class="s">kubectl get nodes | grep -v Ready</span>
-<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">检查磁盘空间</span>
-  <span class="na">shell</span><span class="pi">:</span> <span class="s">df -h | awk '$5&gt;80 {print $0}'</span>
+<h3 id="脚本开发规范">脚本开发规范</h3>
+
+<ul>
+  <li><strong>开发语言</strong>：统一使用 Python、Shell、Go 等</li>
+  <li><strong>代码规范</strong>：遵循团队代码规范，注释清晰</li>
+  <li><strong>参数化设计</strong>：支持参数输入，便于复用</li>
+  <li><strong>异常处理</strong>：完善的异常处理和日志记录</li>
+  <li><strong>幂等性</strong>：脚本执行多次结果一致</li>
+  <li><strong>文档说明</strong>：每个脚本需有 README 说明</li>
+</ul>
+
+<h3 id="脚本库管理">脚本库管理</h3>
+
+<ul>
+  <li><strong>版本控制</strong>：所有脚本纳入 Git 版本控制</li>
+  <li><strong>统一存储</strong>：脚本统一存储在脚本库（如 GitLab、GitHub）</li>
+  <li><strong>分类管理</strong>：按功能分类（巡检、部署、备份等）</li>
+  <li><strong>权限管理</strong>：脚本访问权限控制，敏感脚本加密</li>
+  <li><strong>定期评审</strong>：定期评审脚本，优化和重构</li>
+</ul>
+
+<h2 id="四操作流程">四、操作流程</h2>
+
+<h3 id="巡检任务配置流程">巡检任务配置流程</h3>
+
+<ol>
+  <li><strong>确定巡检项</strong> → 根据业务需求确定巡检内容</li>
+  <li><strong>编写巡检脚本</strong> → 开发或选择现有脚本</li>
+  <li><strong>配置定时任务</strong> → 配置 cron 或调度系统</li>
+  <li><strong>测试验证</strong> → 在测试环境验证脚本功能</li>
+  <li><strong>上线运行</strong> → 部署到生产环境</li>
+  <li><strong>监控告警</strong> → 配置异常告警规则</li>
+  <li><strong>定期优化</strong> → 根据巡检结果优化脚本</li>
+</ol>
+
+<h3 id="脚本开发流程">脚本开发流程</h3>
+
+<ol>
+  <li><strong>需求分析</strong> → 明确脚本功能和需求</li>
+  <li><strong>设计开发</strong> → 编写脚本代码</li>
+  <li><strong>代码评审</strong> → 代码提交前进行评审</li>
+  <li><strong>测试验证</strong> → 在测试环境验证功能</li>
+  <li><strong>文档编写</strong> → 编写 README 和使用说明</li>
+  <li><strong>提交入库</strong> → 提交到脚本库</li>
+  <li><strong>上线使用</strong> → 部署到生产环境使用</li>
+</ol>
+
+<h3 id="脚本维护流程">脚本维护流程</h3>
+
+<ol>
+  <li><strong>问题反馈</strong> → 收集脚本使用中的问题</li>
+  <li><strong>问题分析</strong> → 分析问题原因</li>
+  <li><strong>优化改进</strong> → 优化脚本代码</li>
+  <li><strong>测试验证</strong> → 验证改进效果</li>
+  <li><strong>更新文档</strong> → 更新相关文档</li>
+  <li><strong>版本发布</strong> → 发布新版本</li>
+</ol>
+
+<h2 id="五实际案例">五、实际案例</h2>
+
+<h3 id="案例1kubernetes-集群巡检">案例1：Kubernetes 集群巡检</h3>
+
+<ul>
+  <li><strong>场景</strong>：每日巡检 Kubernetes 集群健康状态</li>
+  <li><strong>巡检内容</strong>：
+    <ul>
+      <li>节点 Ready 状态</li>
+      <li>Pod 异常状态</li>
+      <li>资源使用率</li>
+      <li>证书有效期</li>
+    </ul>
+  </li>
+  <li><strong>实现方式</strong>：Ansible Playbook + Prometheus Alert</li>
+  <li><strong>结果</strong>：每日自动巡检，异常自动告警</li>
+  <li><strong>亮点</strong>：自动化巡检，及时发现问题</li>
+</ul>
+
+<h3 id="案例2磁盘空间巡检">案例2：磁盘空间巡检</h3>
+
+<ul>
+  <li><strong>场景</strong>：每周巡检服务器磁盘空间</li>
+  <li><strong>巡检内容</strong>：
+    <ul>
+      <li>磁盘使用率 &gt;80% 告警</li>
+      <li>磁盘使用率 &gt;90% 紧急告警</li>
+      <li>大文件识别和清理建议</li>
+    </ul>
+  </li>
+  <li><strong>实现方式</strong>：Shell 脚本 + cron</li>
+  <li><strong>结果</strong>：提前发现磁盘空间不足，及时处理</li>
+  <li><strong>亮点</strong>：分级告警，提供处理建议</li>
+</ul>
+
+<h3 id="案例3证书有效期巡检">案例3：证书有效期巡检</h3>
+
+<ul>
+  <li><strong>场景</strong>：每月巡检 SSL 证书有效期</li>
+  <li><strong>巡检内容</strong>：
+    <ul>
+      <li>证书有效期 &lt;30 天告警</li>
+      <li>证书有效期 &lt;7 天紧急告警</li>
+      <li>证书即将过期提醒</li>
+    </ul>
+  </li>
+  <li><strong>实现方式</strong>：Python 脚本 + 邮件通知</li>
+  <li><strong>结果</strong>：提前发现证书即将过期，及时续期</li>
+  <li><strong>亮点</strong>：提前预警，避免证书过期</li>
+</ul>
+
+<h2 id="六操作模板">六、操作模板</h2>
+
+<h3 id="巡检脚本模板shell">巡检脚本模板（Shell）</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># 巡检脚本模板</span>
+<span class="c"># 功能：检查系统健康状态</span>
+<span class="c"># 作者：运维团队</span>
+<span class="c"># 日期：2024-01-01</span>
+
+<span class="nb">set</span> <span class="nt">-e</span>
+
+<span class="nv">LOG_FILE</span><span class="o">=</span><span class="s2">"/var/log/health-check.log"</span>
+<span class="nv">ALERT_EMAIL</span><span class="o">=</span><span class="s2">"ops@example.com"</span>
+
+<span class="c"># 日志函数</span>
+log<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> <span class="s2">"[</span><span class="si">$(</span><span class="nb">date</span> +<span class="s1">'%Y-%m-%d %H:%M:%S'</span><span class="si">)</span><span class="s2">] </span><span class="nv">$1</span><span class="s2">"</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="k">${</span><span class="nv">LOG_FILE</span><span class="k">}</span>
+<span class="o">}</span>
+
+<span class="c"># 告警函数</span>
+alert<span class="o">()</span> <span class="o">{</span>
+    log <span class="s2">"ALERT: </span><span class="nv">$1</span><span class="s2">"</span>
+    <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> | mail <span class="nt">-s</span> <span class="s2">"系统告警"</span> <span class="k">${</span><span class="nv">ALERT_EMAIL</span><span class="k">}</span>
+<span class="o">}</span>
+
+<span class="c"># 检查节点健康</span>
+check_nodes<span class="o">()</span> <span class="o">{</span>
+    log <span class="s2">"检查 Kubernetes 节点状态..."</span>
+    <span class="nv">NOT_READY</span><span class="o">=</span><span class="si">$(</span>kubectl get nodes | <span class="nb">grep</span> <span class="nt">-v</span> Ready | <span class="nb">wc</span> <span class="nt">-l</span><span class="si">)</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="k">${</span><span class="nv">NOT_READY</span><span class="k">}</span> <span class="nt">-gt</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span>alert <span class="s2">"发现 </span><span class="k">${</span><span class="nv">NOT_READY</span><span class="k">}</span><span class="s2"> 个节点不健康"</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="c"># 检查磁盘空间</span>
+check_disk<span class="o">()</span> <span class="o">{</span>
+    log <span class="s2">"检查磁盘空间..."</span>
+    <span class="nb">df</span> <span class="nt">-h</span> | <span class="nb">awk</span> <span class="s1">'NR&gt;1 {if ($5+0 &gt; 80) print "磁盘使用率告警: " $1 " " $5}'</span>
+<span class="o">}</span>
+
+<span class="c"># 主函数</span>
+main<span class="o">()</span> <span class="o">{</span>
+    log <span class="s2">"开始巡检..."</span>
+    check_nodes
+    check_disk
+    log <span class="s2">"巡检完成"</span>
+<span class="o">}</span>
+
+main <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 </code></pre></div></div>
 
-<h2 id="三脚本库管理">三、脚本库管理</h2>
+<h3 id="巡检脚本模板ansible">巡检脚本模板（Ansible）</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">系统巡检</span>
+  <span class="na">hosts</span><span class="pi">:</span> <span class="s">all</span>
+  <span class="na">tasks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">检查节点 Ready 状态</span>
+      <span class="na">shell</span><span class="pi">:</span> <span class="s">kubectl get nodes | grep -v Ready</span>
+      <span class="na">register</span><span class="pi">:</span> <span class="s">not_ready_nodes</span>
+      <span class="na">failed_when</span><span class="pi">:</span> <span class="kc">false</span>
+      
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">告警不健康节点</span>
+      <span class="na">debug</span><span class="pi">:</span>
+        <span class="na">msg</span><span class="pi">:</span> <span class="s2">"</span><span class="s">发现不健康节点:</span><span class="nv"> </span><span class="s">"</span>
+      <span class="na">when</span><span class="pi">:</span> <span class="s">not_ready_nodes.stdout != ""</span>
+
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">检查磁盘空间</span>
+      <span class="na">shell</span><span class="pi">:</span> <span class="s">df -h | awk '$5+0 &gt; 80 {print $1 " " $5}'</span>
+      <span class="na">register</span><span class="pi">:</span> <span class="s">disk_usage</span>
+      <span class="na">failed_when</span><span class="pi">:</span> <span class="kc">false</span>
+      
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">告警磁盘空间不足</span>
+      <span class="na">debug</span><span class="pi">:</span>
+        <span class="na">msg</span><span class="pi">:</span> <span class="s2">"</span><span class="s">磁盘使用率告警:</span><span class="nv"> </span><span class="s">"</span>
+      <span class="na">when</span><span class="pi">:</span> <span class="s">disk_usage.stdout != ""</span>
+
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">检查证书有效期</span>
+      <span class="na">shell</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="s">openssl x509 -in /etc/ssl/certs/cert.pem -noout -enddate</span>
+      <span class="na">register</span><span class="pi">:</span> <span class="s">cert_expiry</span>
+      <span class="na">failed_when</span><span class="pi">:</span> <span class="kc">false</span>
+</code></pre></div></div>
+
+<h3 id="巡检脚本模板python">巡检脚本模板（Python）</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span><span class="sh">"""</span><span class="s">
+巡检脚本模板
+功能：检查系统健康状态
+</span><span class="sh">"""</span>
+<span class="kn">import</span> <span class="n">subprocess</span>
+<span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">import</span> <span class="n">smtplib</span>
+<span class="kn">from</span> <span class="n">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">logging</span><span class="p">.</span><span class="nf">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="p">.</span><span class="n">INFO</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="sh">'</span><span class="s">%(asctime)s - %(levelname)s - %(message)s</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">handlers</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">logging</span><span class="p">.</span><span class="nc">FileHandler</span><span class="p">(</span><span class="sh">'</span><span class="s">/var/log/health-check.log</span><span class="sh">'</span><span class="p">),</span>
+        <span class="n">logging</span><span class="p">.</span><span class="nc">StreamHandler</span><span class="p">()</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">check_nodes</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">检查 Kubernetes 节点状态</span><span class="sh">"""</span>
+    <span class="n">logging</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">检查 Kubernetes 节点状态...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+        <span class="p">[</span><span class="sh">'</span><span class="s">kubectl</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">get</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">nodes</span><span class="sh">'</span><span class="p">],</span>
+        <span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">text</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+    <span class="n">not_ready</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">result</span><span class="p">.</span><span class="n">stdout</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span> <span class="k">if</span> <span class="sh">'</span><span class="s">NotReady</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">line</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">not_ready</span><span class="p">:</span>
+        <span class="n">logging</span><span class="p">.</span><span class="nf">warning</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">发现不健康节点: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">not_ready</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">def</span> <span class="nf">check_disk</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">检查磁盘空间</span><span class="sh">"""</span>
+    <span class="n">logging</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">检查磁盘空间...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+        <span class="p">[</span><span class="sh">'</span><span class="s">df</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">-h</span><span class="sh">'</span><span class="p">],</span>
+        <span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">text</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+    <span class="c1"># 解析磁盘使用率
+</span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">result</span><span class="p">.</span><span class="n">stdout</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">usage</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="nf">rstrip</span><span class="p">(</span><span class="sh">'</span><span class="s">%</span><span class="sh">'</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">usage</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="p">.</span><span class="nf">warning</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">磁盘使用率告警: </span><span class="si">{</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">usage</span><span class="si">}</span><span class="s">%</span><span class="sh">"</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">主函数</span><span class="sh">"""</span>
+    <span class="n">logging</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">开始巡检...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">check_nodes</span><span class="p">()</span>
+    <span class="nf">check_disk</span><span class="p">()</span>
+    <span class="n">logging</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">巡检完成</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="cron-配置示例">Cron 配置示例</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 每日凌晨 2 点执行巡检</span>
+0 2 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /usr/local/bin/health-check.sh <span class="o">&gt;&gt;</span> /var/log/health-check.log 2&gt;&amp;1
+
+<span class="c"># 每周一凌晨 3 点执行完整巡检</span>
+0 3 <span class="k">*</span> <span class="k">*</span> 1 /usr/local/bin/full-health-check.sh <span class="o">&gt;&gt;</span> /var/log/full-health-check.log 2&gt;&amp;1
+
+<span class="c"># 每小时检查一次证书有效期</span>
+0 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /usr/local/bin/cert-check.sh <span class="o">&gt;&gt;</span> /var/log/cert-check.log 2&gt;&amp;1
+</code></pre></div></div>
+
+<h2 id="七注意事项">七、注意事项</h2>
+
 <ul>
-  <li>统一存储、版本控制（如 Git）</li>
-  <li>复用与参数化</li>
-  <li>定期评审与优化</li>
+  <li><strong>巡检脚本需有日志与告警</strong>：所有巡检脚本需记录日志，异常需告警</li>
+  <li><strong>关键巡检项需自动化闭环</strong>：关键巡检项发现问题后自动处理或升级</li>
+  <li><strong>脚本变更需评审与测试</strong>：脚本变更需代码评审，在测试环境验证</li>
+  <li><strong>脚本权限控制</strong>：生产环境脚本执行需权限控制，避免误操作</li>
+  <li><strong>定期优化脚本</strong>：定期评审和优化脚本，提升效率和准确性</li>
+  <li><strong>文档维护</strong>：脚本文档需及时更新，保持与代码同步</li>
 </ul>
 
-<h2 id="四注意事项">四、注意事项</h2>
-<ul>
-  <li>巡检脚本需有日志与告警</li>
-  <li>关键巡检项需自动化闭环</li>
-  <li>脚本变更需评审与测试</li>
-</ul>
+<h2 id="八参考资料">八、参考资料</h2>
 
-<h2 id="五参考资料">五、参考资料</h2>
 <ul>
   <li>《自动化运维脚本最佳实践》</li>
   <li>《企业级巡检与监控白皮书》</li>
+  <li>《Ansible 自动化运维指南》</li>
   <li>团队内部脚本库管理制度</li>
 </ul>
 
@@ -335,48 +624,80 @@
     </main>
   </div>
   <footer class="book-footer">
-    <p>© 2025 运维规范文档 | Powered by Jekyll and AI</p>
+    <p>© 2026 运维规范文档 | Powered by Jekyll and AI</p>
   </footer>
-  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" style="display:none;">
-    <span style="font-size:1.5em;">☰</span>
+  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" type="button">
+    <i class="ti ti-menu-2" style="font-size:1.5em;"></i>
   </button>
 </body>
 <script>
   // 移动端侧边栏收起/展开逻辑
-  function toggleSidebar(open) {
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!sidebar) return;
-    if (open === undefined) sidebar.classList.toggle('open');
-    else if (open) sidebar.classList.add('open');
-    else sidebar.classList.remove('open');
-  }
-  function handleSidebarBtn() {
-    var btn = document.getElementById('sidebarToggleBtn');
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!btn || !sidebar) return;
-    function check() {
-      if (window.innerWidth <= 900) {
-        btn.style.display = 'flex';
-        sidebar.classList.remove('open');
+  (function() {
+    function toggleSidebar(open) {
+      var sidebar = document.querySelector('.book-sidebar');
+      if (!sidebar) return;
+      if (open === undefined) {
+        sidebar.classList.toggle('open');
+      } else if (open) {
+        sidebar.classList.add('open');
       } else {
-        btn.style.display = 'none';
         sidebar.classList.remove('open');
       }
     }
-    btn.onclick = function(e) {
-      e.stopPropagation();
-      toggleSidebar();
-    };
-    document.addEventListener('click', function(e) {
-      if (window.innerWidth > 900) return;
+
+    function handleSidebarBtn() {
+      var btn = document.getElementById('sidebarToggleBtn');
       var sidebar = document.querySelector('.book-sidebar');
-      if (sidebar && sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn) {
-        sidebar.classList.remove('open');
+      if (!btn || !sidebar) return;
+
+      function check() {
+        if (window.innerWidth <= 900) {
+          btn.style.display = 'flex';
+          if (!sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        } else {
+          btn.style.display = 'none';
+          sidebar.classList.remove('open');
+        }
       }
-    });
-    window.addEventListener('resize', check);
-    check();
-  }
-  document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSidebar();
+      });
+
+      // 点击外部关闭侧边栏
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth > 900) return;
+        var sidebar = document.querySelector('.book-sidebar');
+        if (sidebar && sidebar.classList.contains('open') && 
+            !sidebar.contains(e.target) && 
+            e.target !== btn && 
+            !btn.contains(e.target)) {
+          sidebar.classList.remove('open');
+        }
+      });
+
+      // ESC 键关闭侧边栏
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var sidebar = document.querySelector('.book-sidebar');
+          if (sidebar && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        }
+      });
+
+      window.addEventListener('resize', check);
+      check();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+    } else {
+      handleSidebarBtn();
+    }
+  })();
 </script>
 </html>

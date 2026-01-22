@@ -49,22 +49,15 @@
     const next = current === 'dark' ? 'light' : 'dark';
     setTheme(next);
     localStorage.setItem(THEME_KEY, next);
+    
     // 动画反馈
     var btn = document.getElementById('theme-toggle');
     if (btn) {
-      btn.classList.add('clicked');
+      btn.style.transform = 'scale(0.95)';
       setTimeout(function() {
-        btn.classList.remove('clicked');
-      }, 500);
+        btn.style.transform = '';
+      }, 150);
     }
-    // 调试输出
-    const styles = getComputedStyle(document.body);
-    const vars = [
-      '--bg-main', '--bg-content', '--text-main', '--sidebar-bg', '--sidebar-text',
-      '--primary', '--accent', '--table-header', '--table-row-even', '--table-row-odd', '--table-hover'
-    ];
-    const varValues = vars.map(v => v + ': ' + styles.getPropertyValue(v));
-    // console.log('[主题切换]', 'current:', current, 'next:', next, 'body.classList:', body.classList.value, '\nCSS变量:', varValues.join(' | '));
   };
 
   // 初始化

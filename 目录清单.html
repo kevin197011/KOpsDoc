@@ -32,8 +32,8 @@
 </head>
 <body>
   <header class="book-header">
-    <a href="/KOpsDoc/" class="book-logo">运维规范文档</a>
-    <button id="theme-toggle" onclick="toggleTheme()" style="float:right;margin-right:2rem;font-size:1.5em;background:none;border:none;cursor:pointer;outline:none;display:flex;align-items:center;gap:0.2em;">
+    <a href="/KOpsDoc/" class="book-logo" aria-label="返回首页">运维规范文档</a>
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="切换主题" type="button">
       <i id="theme-toggle-icon" class="ti ti-moon-stars"></i>
     </button>
   </header>
@@ -292,199 +292,409 @@
         
         <h1 id="运维规范文档汇总清单">运维规范文档汇总清单</h1>
 
+<p>本文档汇总了所有运维规范文档，按功能模块分类，便于快速查找和参考。</p>
+
+<hr />
+
+<h2 id="文档分类说明">文档分类说明</h2>
+
+<ul>
+  <li><strong>0. 目录与索引</strong>：文档导航和索引</li>
+  <li><strong>1. 基础通用规范</strong>：基础设施、资产管理、权限、文档管理等基础规范</li>
+  <li><strong>2. 变更与发布管理</strong>：变更管理、自动化运维、测试演练等规范</li>
+  <li><strong>3. 监控与可观测性</strong>：监控告警、日志管理、效能度量等规范</li>
+  <li><strong>4. 安全与合规</strong>：安全合规、数据安全、应急演练等规范</li>
+  <li><strong>5. 云原生与智能运维</strong>：容器化、CI/CD、IaC、多云、AIOps 等规范</li>
+  <li><strong>6. 运营与可持续发展</strong>：备份恢复、供应商管理、绿色运维等规范</li>
+  <li><strong>7. 工具与补充清单</strong>：运维工具选型和参考</li>
+  <li><strong>8. 补充SOP与实用手册</strong>：安全策略、灾难恢复、发布流程、巡检脚本、值班手册等实用操作手册</li>
+</ul>
+
+<hr />
+
+<h2 id="完整文档清单">完整文档清单</h2>
+
 <table>
   <thead>
     <tr>
       <th>编号</th>
       <th>文档名称</th>
       <th>简要说明</th>
+      <th>适用场景</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td><strong>0. 目录与索引</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>0.1</td>
+      <td>目录清单</td>
+      <td>本文档，汇总所有规范文档</td>
+      <td>文档导航</td>
+    </tr>
+    <tr>
+      <td>0.2</td>
+      <td>README</td>
+      <td>文档使用说明和快速入门</td>
+      <td>文档索引</td>
+    </tr>
+    <tr>
+      <td><strong>1. 基础通用规范</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
       <td>1.1</td>
       <td>基础设施命名规范</td>
       <td>资源命名统一、可追溯，便于自动化管理</td>
+      <td>新建资源、资源命名</td>
     </tr>
     <tr>
       <td>1.2</td>
       <td>主机与资产管理规范</td>
       <td>资产全生命周期管理，提升可见性与合规性</td>
+      <td>资产管理、CMDB</td>
     </tr>
     <tr>
       <td>1.3</td>
       <td>账号与权限管理规范</td>
       <td>账号实名、权限最小化、全程审计</td>
+      <td>账号创建、权限分配</td>
     </tr>
     <tr>
       <td>1.4</td>
       <td>文档与知识管理规范</td>
       <td>知识库、SOP、案例归档与复盘</td>
+      <td>文档管理、知识沉淀</td>
+    </tr>
+    <tr>
+      <td><strong>2. 变更与发布管理</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>2.1</td>
       <td>变更与发布管理规范</td>
       <td>变更全流程可控、可追溯、可回退</td>
+      <td>变更申请、发布操作</td>
+    </tr>
+    <tr>
+      <td>2.1-案例</td>
+      <td>变更与发布管理规范-案例集锦</td>
+      <td>变更发布实际案例参考</td>
+      <td>案例学习</td>
     </tr>
     <tr>
       <td>2.2</td>
       <td>自动化运维与脚本规范</td>
       <td>脚本开发、管理、自动化平台接入</td>
+      <td>脚本开发、自动化</td>
     </tr>
     <tr>
       <td>2.3</td>
       <td>自动化测试与演练规范</td>
       <td>自动化测试、演练、混沌工程</td>
+      <td>测试演练</td>
+    </tr>
+    <tr>
+      <td><strong>3. 监控与可观测性</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>3.1</td>
       <td>监控与告警规范</td>
       <td>监控全覆盖、告警分级、闭环处理</td>
+      <td>监控配置、告警处理</td>
+    </tr>
+    <tr>
+      <td>3.1-流程</td>
+      <td>监控与告警规范-流程图</td>
+      <td>监控告警流程图</td>
+      <td>流程参考</td>
     </tr>
     <tr>
       <td>3.2</td>
       <td>日志与可观测性规范</td>
       <td>日志采集、结构化、分布式追踪</td>
+      <td>日志管理、追踪</td>
     </tr>
     <tr>
       <td>3.3</td>
       <td>运维质量与效能度量规范</td>
       <td>KPI指标、报告、持续改进</td>
+      <td>效能度量、KPI</td>
+    </tr>
+    <tr>
+      <td><strong>4. 安全与合规</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>4.1</td>
       <td>安全合规与审计规范</td>
       <td>安全策略、审计、合规检查</td>
+      <td>安全检查、审计</td>
     </tr>
     <tr>
       <td>4.2</td>
       <td>数据安全与隐私保护规范</td>
       <td>数据分级、加密、脱敏、合规</td>
+      <td>数据安全、隐私保护</td>
     </tr>
     <tr>
       <td>4.3</td>
       <td>运维安全应急演练规范</td>
       <td>应急演练、复盘、持续优化</td>
+      <td>安全演练</td>
+    </tr>
+    <tr>
+      <td><strong>5. 云原生与智能运维</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>5.1</td>
       <td>容器与云原生运维规范</td>
       <td>K8s、镜像、CI/CD、弹性伸缩</td>
+      <td>容器化、K8s运维</td>
     </tr>
     <tr>
       <td>5.2</td>
       <td>CI_CD流水线与自动化规范</td>
       <td>流水线设计、自动化测试、回滚</td>
+      <td>CI/CD、流水线</td>
     </tr>
     <tr>
       <td>5.3</td>
       <td>基础设施即代码（IaC）规范</td>
       <td>IaC目录、命名、回滚、敏感信息管理</td>
+      <td>Terraform、IaC</td>
     </tr>
     <tr>
       <td>5.4</td>
       <td>多云与混合云管理规范</td>
       <td>多云资源统一纳管、网络互通、成本合规</td>
+      <td>多云管理</td>
     </tr>
     <tr>
       <td>5.5</td>
       <td>AIOps与智能运维规范</td>
       <td>AI告警、异常检测、自愈、容量预测</td>
+      <td>AIOps、智能运维</td>
+    </tr>
+    <tr>
+      <td><strong>6. 运营与可持续发展</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>6.1</td>
       <td>备份与恢复规范</td>
       <td>备份策略、恢复流程、演练</td>
+      <td>备份恢复</td>
     </tr>
     <tr>
       <td>6.2</td>
       <td>供应商与外包管理规范</td>
       <td>第三方接入、合同、SLA、交接</td>
+      <td>供应商管理</td>
     </tr>
     <tr>
       <td>6.3</td>
       <td>绿色运维与可持续发展规范</td>
       <td>节能降耗、资源回收、碳排放监控</td>
+      <td>绿色运维</td>
+    </tr>
+    <tr>
+      <td><strong>7. 工具与补充清单</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>7.1</td>
       <td>运维常用工具清单</td>
       <td>各领域主流运维工具归类与选型参考</td>
+      <td>工具选型</td>
+    </tr>
+    <tr>
+      <td><strong>8. 补充SOP与实用手册</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
       <td>8.1</td>
       <td>安全策略SOP</td>
       <td>RBAC权限、密钥管理、API审计等安全操作标准流程</td>
+      <td>安全操作</td>
     </tr>
     <tr>
       <td>8.2</td>
       <td>灾难恢复流程</td>
       <td>etcd备份恢复、跨区容灾、应急演练SOP</td>
+      <td>灾难恢复</td>
     </tr>
     <tr>
       <td>8.3</td>
       <td>DevOps发布流程</td>
       <td>蓝绿/灰度发布、回滚、自动化部署与审计</td>
+      <td>发布流程</td>
     </tr>
     <tr>
       <td>8.4</td>
       <td>巡检与自动化脚本</td>
       <td>定时巡检、脚本库管理、自动化闭环</td>
+      <td>巡检脚本</td>
     </tr>
     <tr>
       <td>8.5</td>
       <td>值班手册</td>
       <td>值班排班、告警响应、交接流程与常用联系</td>
+      <td>值班操作</td>
     </tr>
   </tbody>
 </table>
+
+<hr />
+
+<h2 id="文档使用指南">文档使用指南</h2>
+
+<h3 id="按场景查找">按场景查找</h3>
+
+<ul>
+  <li><strong>新建资源</strong>：参考 1.1 基础设施命名规范</li>
+  <li><strong>变更发布</strong>：参考 2.1 变更与发布管理规范、8.3 DevOps发布流程</li>
+  <li><strong>监控告警</strong>：参考 3.1 监控与告警规范</li>
+  <li><strong>安全操作</strong>：参考 4.1 安全合规与审计规范、8.1 安全策略SOP</li>
+  <li><strong>容器化</strong>：参考 5.1 容器与云原生运维规范</li>
+  <li><strong>CI/CD</strong>：参考 5.2 CI_CD流水线与自动化规范</li>
+  <li><strong>备份恢复</strong>：参考 6.1 备份与恢复规范、8.2 灾难恢复流程</li>
+  <li><strong>值班操作</strong>：参考 8.5 值班手册</li>
+</ul>
+
+<h3 id="按角色查找">按角色查找</h3>
+
+<ul>
+  <li><strong>运维工程师</strong>：重点关注 2.x、3.x、8.x 系列文档</li>
+  <li><strong>安全工程师</strong>：重点关注 4.x、8.1 文档</li>
+  <li><strong>开发工程师</strong>：重点关注 2.1、5.2 文档</li>
+  <li><strong>架构师</strong>：重点关注 1.x、5.x、6.x 文档</li>
+  <li><strong>管理者</strong>：重点关注 3.3、6.2、6.3 文档</li>
+</ul>
+
+<h3 id="文档更新说明">文档更新说明</h3>
+
+<ul>
+  <li>文档版本：v1.0</li>
+  <li>最后更新：2024-01-27</li>
+  <li>维护团队：运维团队</li>
+  <li>反馈渠道：通过 Git 提交 Issue 或联系运维团队</li>
+</ul>
+
+<hr />
+
+<h2 id="快速链接">快速链接</h2>
+
+<ul>
+  <li><a href="./README.md">README - 文档使用说明</a></li>
+  <li><a href="./1.1-基础设施命名规范.md">1.1 - 基础设施命名规范</a></li>
+  <li><a href="./2.1-变更与发布管理规范.md">2.1 - 变更与发布管理规范</a></li>
+  <li><a href="./3.1-监控与告警规范.md">3.1 - 监控与告警规范</a></li>
+  <li><a href="./5.1-容器与云原生运维规范.md">5.1 - 容器与云原生运维规范</a></li>
+  <li><a href="./8.1-安全策略SOP.md">8.1 - 安全策略SOP</a></li>
+  <li><a href="./8.5-值班手册.md">8.5 - 值班手册</a></li>
+</ul>
 
       </article>
     </main>
   </div>
   <footer class="book-footer">
-    <p>© 2025 运维规范文档 | Powered by Jekyll and AI</p>
+    <p>© 2026 运维规范文档 | Powered by Jekyll and AI</p>
   </footer>
-  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" style="display:none;">
-    <span style="font-size:1.5em;">☰</span>
+  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" type="button">
+    <i class="ti ti-menu-2" style="font-size:1.5em;"></i>
   </button>
 </body>
 <script>
   // 移动端侧边栏收起/展开逻辑
-  function toggleSidebar(open) {
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!sidebar) return;
-    if (open === undefined) sidebar.classList.toggle('open');
-    else if (open) sidebar.classList.add('open');
-    else sidebar.classList.remove('open');
-  }
-  function handleSidebarBtn() {
-    var btn = document.getElementById('sidebarToggleBtn');
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!btn || !sidebar) return;
-    function check() {
-      if (window.innerWidth <= 900) {
-        btn.style.display = 'flex';
-        sidebar.classList.remove('open');
+  (function() {
+    function toggleSidebar(open) {
+      var sidebar = document.querySelector('.book-sidebar');
+      if (!sidebar) return;
+      if (open === undefined) {
+        sidebar.classList.toggle('open');
+      } else if (open) {
+        sidebar.classList.add('open');
       } else {
-        btn.style.display = 'none';
         sidebar.classList.remove('open');
       }
     }
-    btn.onclick = function(e) {
-      e.stopPropagation();
-      toggleSidebar();
-    };
-    document.addEventListener('click', function(e) {
-      if (window.innerWidth > 900) return;
+
+    function handleSidebarBtn() {
+      var btn = document.getElementById('sidebarToggleBtn');
       var sidebar = document.querySelector('.book-sidebar');
-      if (sidebar && sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn) {
-        sidebar.classList.remove('open');
+      if (!btn || !sidebar) return;
+
+      function check() {
+        if (window.innerWidth <= 900) {
+          btn.style.display = 'flex';
+          if (!sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        } else {
+          btn.style.display = 'none';
+          sidebar.classList.remove('open');
+        }
       }
-    });
-    window.addEventListener('resize', check);
-    check();
-  }
-  document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSidebar();
+      });
+
+      // 点击外部关闭侧边栏
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth > 900) return;
+        var sidebar = document.querySelector('.book-sidebar');
+        if (sidebar && sidebar.classList.contains('open') && 
+            !sidebar.contains(e.target) && 
+            e.target !== btn && 
+            !btn.contains(e.target)) {
+          sidebar.classList.remove('open');
+        }
+      });
+
+      // ESC 键关闭侧边栏
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var sidebar = document.querySelector('.book-sidebar');
+          if (sidebar && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        }
+      });
+
+      window.addEventListener('resize', check);
+      check();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+    } else {
+      handleSidebarBtn();
+    }
+  })();
 </script>
 </html>

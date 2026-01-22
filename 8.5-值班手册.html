@@ -32,8 +32,8 @@
 </head>
 <body>
   <header class="book-header">
-    <a href="/KOpsDoc/" class="book-logo">运维规范文档</a>
-    <button id="theme-toggle" onclick="toggleTheme()" style="float:right;margin-right:2rem;font-size:1.5em;background:none;border:none;cursor:pointer;outline:none;display:flex;align-items:center;gap:0.2em;">
+    <a href="/KOpsDoc/" class="book-logo" aria-label="返回首页">运维规范文档</a>
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="切换主题" type="button">
       <i id="theme-toggle-icon" class="ti ti-moon-stars"></i>
     </button>
   </header>
@@ -292,44 +292,313 @@
         
         <h1 id="85-值班手册">8.5 值班手册</h1>
 
-<h2 id="一值班排班与职责">一、值班排班与职责</h2>
+<h2 id="一适用范围与目标">一、适用范围与目标</h2>
+
 <ul>
-  <li>明确值班时间、人员、联系方式</li>
-  <li>交接班流程与记录</li>
-  <li>主要职责：监控告警响应、故障处理、日常巡检</li>
+  <li>适用于运维团队的值班排班、告警响应、故障处理等日常运维工作。</li>
+  <li>目标：建立标准化的值班流程，保障 7x24 小时运维响应，提升故障处理效率。</li>
 </ul>
 
-<h2 id="二告警响应规范">二、告警响应规范</h2>
-<ul>
-  <li>告警分级（P1/P2/P3）与响应时限</li>
-  <li>处理流程：接警 → 研判 → 处置 → 记录</li>
-  <li>重大告警需升级通知主管/团队</li>
-</ul>
+<h2 id="二管理目标">二、管理目标</h2>
 
-<h2 id="三交接流程">三、交接流程</h2>
 <ol>
-  <li>交接前检查未处理告警、工单、变更</li>
-  <li>交接表签字/系统确认</li>
-  <li>交接后新值班人负责所有运维事件</li>
+  <li>值班排班规范，职责明确，交接顺畅</li>
+  <li>告警响应及时，分级处理，闭环管理</li>
+  <li>故障处理流程标准化，快速恢复业务</li>
+  <li>值班记录完整，便于复盘和改进</li>
 </ol>
 
-<h2 id="四常用联系方式">四、常用联系方式</h2>
+<h2 id="三详细规范">三、详细规范</h2>
+
+<h3 id="值班排班与职责">值班排班与职责</h3>
+
 <ul>
-  <li>运维群、电话、应急联系人表</li>
-  <li>主管/专家组联系方式</li>
+  <li><strong>排班方式</strong>：7x24 小时轮班，每班 1-2 人</li>
+  <li><strong>值班时间</strong>：
+    <ul>
+      <li>白班：09:00 - 18:00</li>
+      <li>晚班：18:00 - 次日 09:00</li>
+      <li>周末班：全天</li>
+    </ul>
+  </li>
+  <li><strong>值班职责</strong>：
+    <ul>
+      <li>监控告警响应和处理</li>
+      <li>故障排查和恢复</li>
+      <li>日常巡检执行</li>
+      <li>变更操作执行（如需要）</li>
+      <li>值班记录填写</li>
+    </ul>
+  </li>
+  <li><strong>值班要求</strong>：
+    <ul>
+      <li>保持通讯畅通（电话、IM）</li>
+      <li>及时响应告警（P1 5 分钟内，P2 15 分钟内）</li>
+      <li>重大事件及时上报</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="五注意事项">五、注意事项</h2>
+<h3 id="告警响应规范">告警响应规范</h3>
+
 <ul>
-  <li>值班期间保持通讯畅通，及时响应</li>
-  <li>交接必须有记录，避免遗漏</li>
-  <li>重大事件需及时汇报与复盘</li>
+  <li><strong>告警分级</strong>：
+    <ul>
+      <li><strong>P1（致命）</strong>：业务完全不可用，需立即处理，响应时间 5 分钟</li>
+      <li><strong>P2（严重）</strong>：业务部分不可用或性能严重下降，响应时间 15 分钟</li>
+      <li><strong>P3（一般）</strong>：业务可正常使用但存在异常，响应时间 1 小时</li>
+      <li><strong>P4（提醒）</strong>：信息类告警，无需立即处理</li>
+    </ul>
+  </li>
+  <li><strong>处理流程</strong>：
+    <ol>
+      <li><strong>接警</strong> → 收到告警通知</li>
+      <li><strong>研判</strong> → 分析告警原因和影响范围</li>
+      <li><strong>处置</strong> → 执行处理措施</li>
+      <li><strong>验证</strong> → 验证处理效果</li>
+      <li><strong>记录</strong> → 记录处理过程和结果</li>
+      <li><strong>关闭</strong> → 关闭告警工单</li>
+    </ol>
+  </li>
+  <li><strong>升级机制</strong>：
+    <ul>
+      <li>P1 告警 15 分钟内未解决，需升级通知主管</li>
+      <li>P2 告警 1 小时内未解决，需升级通知主管</li>
+      <li>重大故障需通知技术专家和业务负责人</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="六参考资料">六、参考资料</h2>
+<h3 id="交接流程">交接流程</h3>
+
+<ul>
+  <li><strong>交接时间</strong>：每班次开始前 15 分钟进行交接</li>
+  <li><strong>交接内容</strong>：
+    <ul>
+      <li>未处理的告警和工单</li>
+      <li>进行中的变更和操作</li>
+      <li>已知问题和风险</li>
+      <li>待办事项</li>
+      <li>重要通知和变更</li>
+    </ul>
+  </li>
+  <li><strong>交接方式</strong>：
+    <ul>
+      <li>面对面交接（优先）</li>
+      <li>电话/视频交接</li>
+      <li>交接记录系统确认</li>
+    </ul>
+  </li>
+  <li><strong>交接记录</strong>：填写交接记录表，双方签字确认</li>
+</ul>
+
+<h2 id="四操作流程">四、操作流程</h2>
+
+<h3 id="值班开始流程">值班开始流程</h3>
+
+<ol>
+  <li><strong>查看交接记录</strong> → 了解上一班次情况</li>
+  <li><strong>检查告警系统</strong> → 确认告警系统正常</li>
+  <li><strong>检查监控面板</strong> → 确认系统状态正常</li>
+  <li><strong>确认联系方式</strong> → 确认通讯工具正常</li>
+  <li><strong>开始值班</strong> → 正式进入值班状态</li>
+</ol>
+
+<h3 id="告警处理流程">告警处理流程</h3>
+
+<ol>
+  <li><strong>接收告警</strong> → 收到告警通知（邮件/短信/IM）</li>
+  <li><strong>确认告警</strong> → 在告警系统中确认收到</li>
+  <li><strong>分析问题</strong> → 查看监控数据，分析问题原因</li>
+  <li><strong>评估影响</strong> → 评估问题影响范围</li>
+  <li><strong>执行处理</strong> → 执行处理措施（重启服务、扩容、回滚等）</li>
+  <li><strong>验证效果</strong> → 验证处理效果，确认业务恢复</li>
+  <li><strong>记录归档</strong> → 记录处理过程和结果</li>
+  <li><strong>关闭告警</strong> → 在告警系统中关闭告警</li>
+</ol>
+
+<h3 id="交接班流程">交接班流程</h3>
+
+<ol>
+  <li><strong>准备交接</strong> → 整理本班次工作内容</li>
+  <li><strong>填写交接记录</strong> → 填写交接记录表</li>
+  <li><strong>面对面交接</strong> → 与下一班次值班人员交接</li>
+  <li><strong>确认交接</strong> → 双方确认交接内容</li>
+  <li><strong>签字确认</strong> → 在交接记录表上签字</li>
+  <li><strong>完成交接</strong> → 正式完成交接</li>
+</ol>
+
+<h2 id="五实际案例">五、实际案例</h2>
+
+<h3 id="案例1p1-告警快速响应">案例1：P1 告警快速响应</h3>
+
+<ul>
+  <li><strong>场景</strong>：生产环境数据库连接池耗尽，业务不可用</li>
+  <li><strong>时间线</strong>：
+    <ul>
+      <li>00:05：收到 P1 告警</li>
+      <li>00:06：值班人员确认告警</li>
+      <li>00:08：分析问题，确认为连接池耗尽</li>
+      <li>00:10：执行扩容操作</li>
+      <li>00:15：验证业务恢复</li>
+      <li>00:20：记录处理过程</li>
+    </ul>
+  </li>
+  <li><strong>结果</strong>：15 分钟内恢复业务，符合 P1 响应要求</li>
+  <li><strong>亮点</strong>：快速响应，准确判断，及时恢复</li>
+</ul>
+
+<h3 id="案例2p2-告警升级处理">案例2：P2 告警升级处理</h3>
+
+<ul>
+  <li><strong>场景</strong>：Web 服务响应时间异常，部分用户受影响</li>
+  <li><strong>时间线</strong>：
+    <ul>
+      <li>14:30：收到 P2 告警</li>
+      <li>14:35：值班人员确认告警</li>
+      <li>14:45：分析问题，确认为负载过高</li>
+      <li>15:00：执行扩容操作</li>
+      <li>15:15：问题未完全解决，升级通知主管</li>
+      <li>15:30：主管和技术专家介入</li>
+      <li>16:00：问题解决，业务恢复</li>
+    </ul>
+  </li>
+  <li><strong>结果</strong>：1.5 小时内解决问题，符合升级机制</li>
+  <li><strong>亮点</strong>：及时升级，团队协作，问题解决</li>
+</ul>
+
+<h3 id="案例3交接班顺畅">案例3：交接班顺畅</h3>
+
+<ul>
+  <li><strong>场景</strong>：晚班向白班交接</li>
+  <li><strong>交接内容</strong>：
+    <ul>
+      <li>未处理告警：1 个 P3 告警（证书即将过期）</li>
+      <li>进行中变更：无</li>
+      <li>已知问题：磁盘空间使用率 85%，需关注</li>
+      <li>待办事项：证书续期申请</li>
+    </ul>
+  </li>
+  <li><strong>交接方式</strong>：面对面交接 + 交接记录表</li>
+  <li><strong>结果</strong>：交接顺畅，白班人员清楚了解情况</li>
+  <li><strong>亮点</strong>：交接内容完整，记录清晰</li>
+</ul>
+
+<h2 id="六操作模板">六、操作模板</h2>
+
+<h3 id="值班交接记录表">值班交接记录表</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># 值班交接记录表</span>
+
+<span class="gu">## 基本信息</span>
+<span class="p">-</span> 交接时间：2024-01-15 08:45
+<span class="p">-</span> 交班人员：张三
+<span class="p">-</span> 接班人员：李四
+<span class="p">-</span> 值班时段：2024-01-14 18:00 - 2024-01-15 09:00
+
+<span class="gu">## 未处理告警</span>
+| 告警编号 | 告警级别 | 告警内容 | 处理状态 | 备注 |
+|---------|---------|---------|---------|------|
+| ALERT-001 | P3 | 证书即将过期 | 待处理 | 已申请续期 |
+
+<span class="gu">## 进行中变更</span>
+| 变更编号 | 变更内容 | 当前状态 | 预计完成时间 |
+|---------|---------|---------|-------------|
+| 无 | - | - | - |
+
+<span class="gu">## 已知问题和风险</span>
+<span class="p">1.</span> 磁盘空间使用率 85%，需关注
+<span class="p">2.</span> 数据库连接池使用率较高，需监控
+
+<span class="gu">## 待办事项</span>
+<span class="p">1.</span> 证书续期申请（预计 1 月 20 日完成）
+<span class="p">2.</span> 磁盘清理计划（预计 1 月 18 日执行）
+
+<span class="gu">## 重要通知</span>
+<span class="p">-</span> 无
+
+<span class="gu">## 交接确认</span>
+<span class="p">-</span> 交班人员签字：张三
+<span class="p">-</span> 接班人员签字：李四
+<span class="p">-</span> 交接时间：2024-01-15 08:50
+</code></pre></div></div>
+
+<h3 id="告警处理记录模板">告警处理记录模板</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># 告警处理记录</span>
+
+<span class="gu">## 告警信息</span>
+<span class="p">-</span> 告警编号：ALERT-001
+<span class="p">-</span> 告警级别：P1
+<span class="p">-</span> 告警时间：2024-01-15 00:05
+<span class="p">-</span> 告警内容：数据库连接池耗尽
+<span class="p">-</span> 影响范围：所有业务不可用
+
+<span class="gu">## 处理过程</span>
+<span class="p">1.</span> 00:06 确认告警，开始分析
+<span class="p">2.</span> 00:08 确认为连接池耗尽，执行扩容
+<span class="p">3.</span> 00:10 扩容完成，等待生效
+<span class="p">4.</span> 00:15 验证业务恢复
+<span class="p">5.</span> 00:20 记录处理过程
+
+<span class="gu">## 处理结果</span>
+<span class="p">-</span> 处理状态：已解决
+<span class="p">-</span> 恢复时间：2024-01-15 00:15
+<span class="p">-</span> 处理时长：10 分钟
+<span class="p">-</span> 业务影响：15 分钟不可用
+
+<span class="gu">## 根本原因</span>
+数据库连接池配置过小，无法应对业务高峰
+
+<span class="gu">## 改进措施</span>
+<span class="p">1.</span> 调整连接池配置
+<span class="p">2.</span> 增加连接池监控
+<span class="p">3.</span> 优化数据库连接使用
+
+<span class="gu">## 处理人员</span>
+<span class="p">-</span> 值班人员：张三
+<span class="p">-</span> 处理时间：2024-01-15 00:05-00:20
+</code></pre></div></div>
+
+<h3 id="常用联系方式">常用联系方式</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># 常用联系方式</span>
+
+<span class="gu">## 运维团队</span>
+<span class="p">-</span> 运维主管：13800138000
+<span class="p">-</span> 技术专家：13900139000
+<span class="p">-</span> 值班电话：400-xxx-xxxx
+
+<span class="gu">## 业务团队</span>
+<span class="p">-</span> 业务负责人：13700137000
+<span class="p">-</span> 产品经理：13600136000
+
+<span class="gu">## 供应商</span>
+<span class="p">-</span> 云服务商：400-xxx-xxxx
+<span class="p">-</span> 硬件供应商：400-xxx-xxxx
+
+<span class="gu">## 应急联系</span>
+<span class="p">-</span> 安全团队：security@example.com
+<span class="p">-</span> 法务团队：legal@example.com
+</code></pre></div></div>
+
+<h2 id="七注意事项">七、注意事项</h2>
+
+<ul>
+  <li><strong>值班期间保持通讯畅通</strong>：电话、IM 等通讯工具需保持畅通</li>
+  <li><strong>交接必须有记录</strong>：所有交接需有记录，避免遗漏</li>
+  <li><strong>重大事件需及时汇报</strong>：P1 告警、重大故障需及时上报主管</li>
+  <li><strong>告警需闭环处理</strong>：所有告警需处理完成并记录</li>
+  <li><strong>值班记录需完整</strong>：值班期间所有操作需记录</li>
+  <li><strong>定期复盘改进</strong>：定期复盘值班工作，持续改进</li>
+</ul>
+
+<h2 id="八参考资料">八、参考资料</h2>
+
 <ul>
   <li>《企业 IT 值班管理制度》</li>
   <li>《运维告警与应急响应白皮书》</li>
+  <li>《故障处理最佳实践》</li>
   <li>团队内部值班手册模板</li>
 </ul>
 
@@ -337,48 +606,80 @@
     </main>
   </div>
   <footer class="book-footer">
-    <p>© 2025 运维规范文档 | Powered by Jekyll and AI</p>
+    <p>© 2026 运维规范文档 | Powered by Jekyll and AI</p>
   </footer>
-  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" style="display:none;">
-    <span style="font-size:1.5em;">☰</span>
+  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" type="button">
+    <i class="ti ti-menu-2" style="font-size:1.5em;"></i>
   </button>
 </body>
 <script>
   // 移动端侧边栏收起/展开逻辑
-  function toggleSidebar(open) {
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!sidebar) return;
-    if (open === undefined) sidebar.classList.toggle('open');
-    else if (open) sidebar.classList.add('open');
-    else sidebar.classList.remove('open');
-  }
-  function handleSidebarBtn() {
-    var btn = document.getElementById('sidebarToggleBtn');
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!btn || !sidebar) return;
-    function check() {
-      if (window.innerWidth <= 900) {
-        btn.style.display = 'flex';
-        sidebar.classList.remove('open');
+  (function() {
+    function toggleSidebar(open) {
+      var sidebar = document.querySelector('.book-sidebar');
+      if (!sidebar) return;
+      if (open === undefined) {
+        sidebar.classList.toggle('open');
+      } else if (open) {
+        sidebar.classList.add('open');
       } else {
-        btn.style.display = 'none';
         sidebar.classList.remove('open');
       }
     }
-    btn.onclick = function(e) {
-      e.stopPropagation();
-      toggleSidebar();
-    };
-    document.addEventListener('click', function(e) {
-      if (window.innerWidth > 900) return;
+
+    function handleSidebarBtn() {
+      var btn = document.getElementById('sidebarToggleBtn');
       var sidebar = document.querySelector('.book-sidebar');
-      if (sidebar && sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn) {
-        sidebar.classList.remove('open');
+      if (!btn || !sidebar) return;
+
+      function check() {
+        if (window.innerWidth <= 900) {
+          btn.style.display = 'flex';
+          if (!sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        } else {
+          btn.style.display = 'none';
+          sidebar.classList.remove('open');
+        }
       }
-    });
-    window.addEventListener('resize', check);
-    check();
-  }
-  document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSidebar();
+      });
+
+      // 点击外部关闭侧边栏
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth > 900) return;
+        var sidebar = document.querySelector('.book-sidebar');
+        if (sidebar && sidebar.classList.contains('open') && 
+            !sidebar.contains(e.target) && 
+            e.target !== btn && 
+            !btn.contains(e.target)) {
+          sidebar.classList.remove('open');
+        }
+      });
+
+      // ESC 键关闭侧边栏
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var sidebar = document.querySelector('.book-sidebar');
+          if (sidebar && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        }
+      });
+
+      window.addEventListener('resize', check);
+      check();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+    } else {
+      handleSidebarBtn();
+    }
+  })();
 </script>
 </html>

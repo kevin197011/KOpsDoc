@@ -32,8 +32,8 @@
 </head>
 <body>
   <header class="book-header">
-    <a href="/KOpsDoc/" class="book-logo">运维规范文档</a>
-    <button id="theme-toggle" onclick="toggleTheme()" style="float:right;margin-right:2rem;font-size:1.5em;background:none;border:none;cursor:pointer;outline:none;display:flex;align-items:center;gap:0.2em;">
+    <a href="/KOpsDoc/" class="book-logo" aria-label="返回首页">运维规范文档</a>
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="切换主题" type="button">
       <i id="theme-toggle-icon" class="ti ti-moon-stars"></i>
     </button>
   </header>
@@ -361,48 +361,80 @@
     </main>
   </div>
   <footer class="book-footer">
-    <p>© 2025 运维规范文档 | Powered by Jekyll and AI</p>
+    <p>© 2026 运维规范文档 | Powered by Jekyll and AI</p>
   </footer>
-  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" style="display:none;">
-    <span style="font-size:1.5em;">☰</span>
+  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="展开/收起导航" type="button">
+    <i class="ti ti-menu-2" style="font-size:1.5em;"></i>
   </button>
 </body>
 <script>
   // 移动端侧边栏收起/展开逻辑
-  function toggleSidebar(open) {
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!sidebar) return;
-    if (open === undefined) sidebar.classList.toggle('open');
-    else if (open) sidebar.classList.add('open');
-    else sidebar.classList.remove('open');
-  }
-  function handleSidebarBtn() {
-    var btn = document.getElementById('sidebarToggleBtn');
-    var sidebar = document.querySelector('.book-sidebar');
-    if (!btn || !sidebar) return;
-    function check() {
-      if (window.innerWidth <= 900) {
-        btn.style.display = 'flex';
-        sidebar.classList.remove('open');
+  (function() {
+    function toggleSidebar(open) {
+      var sidebar = document.querySelector('.book-sidebar');
+      if (!sidebar) return;
+      if (open === undefined) {
+        sidebar.classList.toggle('open');
+      } else if (open) {
+        sidebar.classList.add('open');
       } else {
-        btn.style.display = 'none';
         sidebar.classList.remove('open');
       }
     }
-    btn.onclick = function(e) {
-      e.stopPropagation();
-      toggleSidebar();
-    };
-    document.addEventListener('click', function(e) {
-      if (window.innerWidth > 900) return;
+
+    function handleSidebarBtn() {
+      var btn = document.getElementById('sidebarToggleBtn');
       var sidebar = document.querySelector('.book-sidebar');
-      if (sidebar && sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn) {
-        sidebar.classList.remove('open');
+      if (!btn || !sidebar) return;
+
+      function check() {
+        if (window.innerWidth <= 900) {
+          btn.style.display = 'flex';
+          if (!sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        } else {
+          btn.style.display = 'none';
+          sidebar.classList.remove('open');
+        }
       }
-    });
-    window.addEventListener('resize', check);
-    check();
-  }
-  document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSidebar();
+      });
+
+      // 点击外部关闭侧边栏
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth > 900) return;
+        var sidebar = document.querySelector('.book-sidebar');
+        if (sidebar && sidebar.classList.contains('open') && 
+            !sidebar.contains(e.target) && 
+            e.target !== btn && 
+            !btn.contains(e.target)) {
+          sidebar.classList.remove('open');
+        }
+      });
+
+      // ESC 键关闭侧边栏
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var sidebar = document.querySelector('.book-sidebar');
+          if (sidebar && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+          }
+        }
+      });
+
+      window.addEventListener('resize', check);
+      check();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleSidebarBtn);
+    } else {
+      handleSidebarBtn();
+    }
+  })();
 </script>
 </html>
