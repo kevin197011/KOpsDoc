@@ -104,7 +104,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 确保 body 作为 flex 容器，页脚固定在底部 */
+/* 确保 body 作为 flex 容器 */
 body > .book-header {
   flex-shrink: 0;
 }
@@ -113,11 +113,6 @@ body > .book-container {
   flex: 1 0 auto;
   min-height: 0;
   display: flex;
-}
-
-body > .book-footer {
-  flex-shrink: 0;
-  margin-top: auto;
 }
 
 /* 头部导航栏 - 浮动设计 */
@@ -387,6 +382,7 @@ body.theme-light .search-results {
 .book-content {
   flex: 1;
   padding: 2rem 3rem;
+  padding-bottom: calc(2rem + 80px); /* 为固定页脚留出空间 */
   background: var(--bg-main);
   min-width: 0;
   transition: background-color 0.3s ease;
@@ -627,9 +623,12 @@ body.theme-light .book-content tr:hover {
   color: var(--primary);
 }
 
-/* 页脚 - 固定在底部 */
+/* 页脚 - 固定在底部（不随内容滚动） */
 .book-footer {
-  flex-shrink: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: var(--sidebar-bg);
   color: var(--sidebar-text);
   text-align: center;
@@ -637,8 +636,8 @@ body.theme-light .book-content tr:hover {
   font-size: 0.875rem;
   border-top: 1px solid var(--border);
   width: 100%;
-  z-index: 10;
-  margin-top: auto;
+  z-index: 100;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
 body.theme-light .book-footer {
@@ -700,6 +699,7 @@ body.theme-dark .mermaid .label {
 @media (max-width: 1024px) {
   .book-content {
     padding: 1.5rem 2rem;
+    padding-bottom: calc(1.5rem + 80px); /* 为固定页脚留出空间 */
   }
 
   .book-content article {
@@ -740,6 +740,7 @@ body.theme-dark .mermaid .label {
 
   .book-content {
     padding: 1rem;
+    padding-bottom: calc(1rem + 80px); /* 为固定页脚留出空间 */
     margin-top: 4rem;
   }
 
@@ -769,6 +770,7 @@ body.theme-dark .mermaid .label {
 @media (max-width: 600px) {
   .book-content {
     padding: 0.75rem;
+    padding-bottom: calc(0.75rem + 80px); /* 为固定页脚留出空间 */
     margin-top: 3.5rem;
   }
 
